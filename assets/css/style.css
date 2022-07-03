@@ -1,14 +1,27 @@
 header {
     display: flex;
     justify-content: space-evenly;
-    background-color: rgb(129, 129, 129);
+    background-color: coral;
     height: 50px;
     margin: 0px;
     align-items: center;
+}
+
+body {
+    background-color: navajowhite;
+
+}
+
+button {
+    background-color: cornflowerblue;
+    border-radius: 5%;
+    padding: 6px;
+    border: none;
 }
 
 #btnholder {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 30px;
 }
