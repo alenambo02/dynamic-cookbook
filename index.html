@@ -8,7 +8,7 @@
     <title>My cookbook</title>
 
     <link rel="stylesheet" href="./assets/css/reset.css" />
-    <link rel="stylesheet" href="css/foundation.css" />
+    <link rel="stylesheet" href="./assets/css/foundation.css" />
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
 
 </head>
@@ -17,18 +17,26 @@
     <header>
         <button id="cart">Shopping Cart</button>
         <div>My Cookbook</div>
-        <button id="pantry">What's in my pantry</button>
+        <button id="pantry" data-open="exampleModal">What's in my pantry</button>
     </header>
     <div id="btnholder"><button>Generate Recipes</button>
     </div>
-    <div class="grid-x card-container">
-
+    <div class="grid-x card-container"></div>
+    <div class="reveal" id="exampleModal1" data-reveal>
+        <h1>Awesome. I Have It.</h1>
+        <p class="lead">Your couch. It is mine.</p>
+        <p>I'm a cool paragraph that lives inside of an even cooler modal. Wins!</p>
+        <button class="close-button" data-close aria-label="Close modal" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="js/vendor/what-input.js"></script>
-    <script src="js/vendor/foundation.min.js"></script>
+    <script src="./assets/js/vendor/what-input.js"></script>
+    <script src="./assets/js/vendor/foundation.min.js"></script>
     <script src="./assets/js/script.js"></script>
 
 </body>
+
+</html>
