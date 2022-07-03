@@ -3,8 +3,13 @@ var closePantryModal = $('.close')
 var pantryModal = $('#pantryModal')
 
 $(document).on("click", "#pantry", function (event) {
-    console.log("hi im here")
-    pantryModal.css("display: block")
+    // console.log("hi im here")
+    pantryModal.css("display", "block")
+});
+
+$(document).on("click", ".close", function () {
+    pantryModal.css("display", "none")
+
 });
 
 
