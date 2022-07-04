@@ -73,3 +73,11 @@ $(document).on("click", "#cart", function (event) {
 $(document).on("click", ".close", function () {
     shoppingModal.css("display", "none")
 });
+
+$(document).on("click", "#addCartBtn", function (event) {
+    var cartVal = $(this).siblings("input").val()
+   
+
+
+})
+
