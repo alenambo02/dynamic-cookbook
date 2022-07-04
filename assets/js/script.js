@@ -86,7 +86,7 @@ $(document).on("click", "#addCartBtn", function (event) {
                 if(response.length > 0){
                   addShoopingList(cartVal)  
                 } else {
-                    fakeItemAlert()
+                    itemNotAValidInput()
                 }
     })
 
