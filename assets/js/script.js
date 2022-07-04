@@ -63,13 +63,13 @@ https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=597241d5914540e
 
 
 //shopping modal 
-var pantryModal = $('#pantryModal')
+var shoppingModal = $('#cartModal')
 
 /* Open and close pantry modal*/
-$(document).on("click", "#pantry", function (event) {
-    pantryModal.css("display", "block")
+$(document).on("click", "#cart", function (event) {
+    shoppingModal.css("display", "block")
 });
 
 $(document).on("click", ".close", function () {
-    pantryModal.css("display", "none")
+    shoppingModal.css("display", "none")
 });
