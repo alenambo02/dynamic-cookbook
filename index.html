@@ -16,13 +16,27 @@
 <body>
     <header>
         <button id="cart">Shopping Cart</button>
+        <div id="cartModal" class="shoppingModal">
+            <div class="shoppingModalContent">
+                <span class="close">&times;</span>
+                <div class="shoppingNeeds">
+                    <label for="itemNeeds">Enter items needed:</label>
+                    <input type="text" id="addCartBar" name="cartSearch" value="Onion">
+                    <button type="button" id="addCartBtn">Add item</button>
+                </div>
+                <div class="cart-list">
+                    <h5>Current items in shopping cart</h5>
+                    <ul class="shoppingCartContainer"></ul>
+                </div>
+            </div>
+        </div>
+
 
         <div>My Cookbook</div>
         <button id="pantry">What's in my pantry</button>
         <div id="pantryModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <p>Some text in the Modal..</p>
                 <div class="pantry-search">
                     <label for="itemSearch">Enter the ingredients you have here</label>
                     <input type="text" id="addItemBar" name="itemSearch" value="Apple">
