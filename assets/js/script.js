@@ -21,13 +21,20 @@ $(document).on("click", "#addItemBtn", function(event){ //Add ingredient listene
         })
             .then(function(response){
                 if(response.length > 0){ //Real items will return an array with at least 1 element
-                    console.log("real ingredient")
+                    //console.log("real ingredient")
+                    addPantryIngredient(itemVal)
                 } else { //Fake items will return an empty array
                     fakeItemAlert() //Notify user that it is a fake ingredient
                 }
             })
     }
 })
+
+function addPantryIngredient(item){ //Add input into pantry list
+    var ingCont = $(".ingredients-container")
+    var ing = $("<li>").text(item)
+    ingCont.prepend(ing)
+}
 
 function fakeItemAlert(){ //Notify user that input is not a real ingredient
     /*Add alert elements to modal*/
