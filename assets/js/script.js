@@ -76,8 +76,43 @@ $(document).on("click", ".close", function () {
 
 $(document).on("click", "#addCartBtn", function (event) {
     var cartVal = $(this).siblings("input").val()
-   
+    if(cartVal != ""){
+        var cartCheckUrl = "https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=c8ae3021308e4c6fa278becfa56df80b&query=" + cartVal
+        $.ajax({
+           url: cartCheckUrl,
+           method: "GET" 
+        })
+            .then(function(response) {
+                if(response.length > 0){
+                  addShoopingList(cartVal)  
+                } else {
+                    fakeItemAlert()
+                }
+    })
 
-
+    }
 })
+
+function addShoopingList(item){
+    var listCont = $(".shopping-container")
+    var list = $("<li>").text(item)
+    listCont.prepend(list)
+}
+
+function itemNotAValidInput(){
+    var alertCont = $("<div>").addClass("callout small alert")
+    var alertMessage = $("<h5>").text("Please input a real ingredient")
+    alertCont.append(alertMessage)
+    shoppingModal.append(alertCont)
+
+    var secondsLeftCart = 5 
+    var timerInterval = setInterval(function() { 
+        secondsLeftCart--
+        console.log(secondsLeftCart)
+        if(secondsLeftCart === 0){ 
+            clearInterval(timerInterval)
+            alertCont.remove()
+        }
+    }, 1000)
+}
 
