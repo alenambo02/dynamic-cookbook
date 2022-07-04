@@ -11,7 +11,9 @@ $(document).on("click", ".close", function () {
 
 /*Get List of ingredients*/
 
-
+$(document).on("click", "#addItemBtn", function(event){
+    
+})
 
 /* API ingredient check
 
