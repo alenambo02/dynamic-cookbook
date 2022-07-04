@@ -20,10 +20,32 @@ $(document).on("click", "#addItemBtn", function(event){ //Add ingredient listene
             method: "GET"
         })
             .then(function(response){
-                console.log(response)
+                if(response.length > 0){ //Real items will return an array with at least 1 element
+                    console.log("real ingredient")
+                } else { //Fake items will return an empty array
+                    fakeItemAlert() //Notify user that it is a fake ingredient
+                }
             })
     }
 })
+
+function fakeItemAlert(){ //Notify user that input is not a real ingredient
+    /*Add alert elements to modal*/
+    var alertCont = $("<div>").addClass("callout small alert")
+    var alrMsg = $("<h5>").text("Please input a real ingredient")
+    alertCont.append(alrMsg)
+    pantryModal.append(alertCont)
+
+    var secondsLeft = 5 //Run the alert for 5 seconds
+    var timerInterval = setInterval(function() { 
+        secondsLeft--
+        console.log(secondsLeft)
+        if(secondsLeft === 0){ //Auto close the alert after time runs out
+            clearInterval(timerInterval)
+            alertCont.remove()
+        }
+    }, 1000)
+}
 
 /* API ingredient check
 
