@@ -62,3 +62,7 @@ button {
     text-decoration: none;
     cursor: pointer;
 }
+
+button:hover{
+    cursor: pointer;
+}
