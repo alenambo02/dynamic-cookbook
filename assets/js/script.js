@@ -27,7 +27,7 @@ $(document).on("click", "#addItemBtn", function(event){ //Add ingredient listene
             .then(function(response){
                 if(response.length > 0){ //Real items will return an array with at least 1 element
                     //console.log("real ingredient")
-                    addPantryIngredient(itemVal)
+                    addPantryIngredient(response[0].name.charAt(0).toUpperCase() + response[0].name.slice(1))
                 } else { //Fake items will return an empty array
                     fakeItemAlert() //Notify user that it is a fake ingredient
                 }
