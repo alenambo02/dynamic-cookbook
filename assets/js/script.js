@@ -147,8 +147,18 @@ var displayCards = $('#displaycardshere')
 
 //generate recipes btn
 $(document).on("click", "#generateRecipes", function (event) {
-    displayCards.css("display", "block")
+    // displayCards.css("display", "block")
 });
 
 
+var makeRecipes = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=c8ae3021308e4c6fa278becfa56df80b&query=" + ingredientList
+    $.ajax({
+        url:makeRecipes,
+        method: "GET"
 
+    })
+        .then(function(response){
+            console.log(response)
+    
+
+        })
