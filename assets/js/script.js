@@ -4,6 +4,8 @@ if(localStorage.getItem("pantryIngredients")){ //Check if there is any stored hi
     ingredientList = JSON.parse(localStorage.getItem("pantryIngredients"))
 }
 
+console.log(queryStringifyIngredients())
+
 /* Open and close pantry modal*/
 $(document).on("click", "#pantry", function (event) {
     pantryModal.css("display", "block")
@@ -73,7 +75,17 @@ function fakeItemAlert(){ //Notify user that input is not a real ingredient
     }, 1000)
 }
 
-
+function queryStringifyIngredients(){
+    var rtn = ""
+    for(var i = 0; i < ingredientList.length; i++){
+        if(i==0){
+            rtn+= ingredientList[i]
+        } else {
+            rtn += ",+" + ingredientList[i]
+        }
+    }
+    return rtn
+}
 
 
 
