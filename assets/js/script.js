@@ -171,9 +171,30 @@ $(document).on("click", "#generateRecipes", function (event) {
 
     })
         .then(function(response){
+           
             console.log(response)
     
-            
+        generateRecipeCards(response)
+  
         })
 
 });
+
+
+
+
+var cardContanier = $("#cardscontainer")
+
+
+function generateRecipeCards(data) {
+    var cards =$("<div>").addClass("container")
+    for(var i = 0; i < 7; i++){
+   
+    var title = $("<h3>").text(data[0].title)
+    var img = $("<img>").attr("src", data[0].image)   
+    }
+    
+    cards.append(title, img)
+    cardContanier.append(cards)
+
+}
