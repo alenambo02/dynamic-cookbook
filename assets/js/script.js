@@ -164,22 +164,4 @@ $(document).on("click", "#generateRecipes", function (event) {
     // displayCards.css("display", "block")
     var ingredientParse = queryStringifyIngredients()
 
-    var makeRecipes = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=c8ae3021308e4c6fa278becfa56df80b&ingredients=" + ingredientParse + "&number=15&ranking=2"
-    $.ajax({
-        url:makeRecipes,
-        method: "GET"
-
-    })
-        .then(function(response){
-            console.log(response)
-    
-
-        })
-
-
-
-
-
-});
-
-
+})
