@@ -1,7 +1,11 @@
 var pantryModal = $('#pantryModal')
 var ingredientList = []
+var ingredientCounts = {}
 if(localStorage.getItem("pantryIngredients")){ //Check if there is any stored history to grab
     ingredientList = JSON.parse(localStorage.getItem("pantryIngredients"))
+}
+if(localStorage.getItem("pantryIngredientsCount")){ //Check if there is any stored history to grab
+    ingredientCounts = JSON.parse(localStorage.getItem("pantryIngredientsCounts"))
 }
 
 console.log(queryStringifyIngredients())
@@ -42,6 +46,8 @@ function addPantryIngredient(item){ //Add input into pantry list
         return
     } else {
         ingredientList.push(item)
+        ingredientCounts[item] = 1
+        localStorage.setItem("pantryIngredientsCount", JSON.stringify(ingredientCounts))
         localStorage.setItem("pantryIngredients", JSON.stringify(ingredientList))
         displayPantryIngredietns()
         console.log(item)
@@ -86,6 +92,7 @@ function queryStringifyIngredients(){
     }
     return rtn
 }
+
 
 
 
