@@ -65,7 +65,7 @@ https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=597241d5914540e
 //shopping modal 
 var shoppingModal = $('#cartModal')
 
-/* Open and close pantry modal*/
+/* Open and close shopping modal*/
 $(document).on("click", "#cart", function (event) {
     shoppingModal.css("display", "block")
 });
@@ -115,4 +115,17 @@ function itemNotAValidInput(){
         }
     }, 1000)
 }
+
+//generate recipes section
+
+var recipesBtn = $('#generateRecipes')
+
+var displayCards = $('#displaycardshere')
+
+//generate recipes btn
+$(document).on("click", "#generateRecipes", function (event) {
+    displayCards.css("display", "block")
+});
+
+
 
