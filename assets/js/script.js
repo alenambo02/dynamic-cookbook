@@ -18,16 +18,16 @@ $(document).on("click", ".close", function () {
 
 /*Get List of ingredients*/
 
-$(document).on("click", "#addItemBtn", function(event){ //Add ingredient listener
+$(document).on("click", "#addItemBtn", function (event) { //Add ingredient listener
     var itemVal = $(this).siblings("input").val()
-    if(itemVal != ""){ //Simple validation for if any input at all
+    if (itemVal != "") { //Simple validation for if any input at all
         var itemCheckUrl = "https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=597241d5914540eb9a064d99f044c672&query=" + itemVal
         $.ajax({ //Fetch validation. Call api to see if an ingredient exsists with the name of the input
             url: itemCheckUrl,
             method: "GET"
         })
-            .then(function(response){
-                if(response.length > 0){ //Real items will return an array with at least 1 element
+            .then(function (response) {
+                if (response.length > 0) { //Real items will return an array with at least 1 element
                     //console.log("real ingredient")
                     addPantryIngredient(response[0].name.charAt(0).toUpperCase() + response[0].name.slice(1))
                 } else { //Fake items will return an empty array
@@ -57,7 +57,7 @@ function displayPantryIngredietns(){
     }
 }
 
-function fakeItemAlert(){ //Notify user that input is not a real ingredient
+function fakeItemAlert() { //Notify user that input is not a real ingredient
     /*Add alert elements to modal*/
     var alertCont = $("<div>").addClass("callout small alert")
     var alrMsg = $("<h5>").text("Please input a real ingredient")
@@ -65,10 +65,10 @@ function fakeItemAlert(){ //Notify user that input is not a real ingredient
     pantryModal.append(alertCont)
 
     var secondsLeft = 5 //Run the alert for 5 seconds
-    var timerInterval = setInterval(function() { 
+    var timerInterval = setInterval(function () {
         secondsLeft--
         console.log(secondsLeft)
-        if(secondsLeft === 0){ //Auto close the alert after time runs out
+        if (secondsLeft === 0) { //Auto close the alert after time runs out
             clearInterval(timerInterval)
             alertCont.remove()
         }
@@ -111,45 +111,46 @@ $(document).on("click", ".close", function () {
 
 $(document).on("click", "#addCartBtn", function (event) {
     var cartVal = $(this).siblings("input").val()
-    if(cartVal != ""){
+    if (cartVal != "") {
         var cartCheckUrl = "https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=c8ae3021308e4c6fa278becfa56df80b&query=" + cartVal
         $.ajax({
-           url: cartCheckUrl,
-           method: "GET" 
+            url: cartCheckUrl,
+            method: "GET"
         })
-            .then(function(response) {
-                if(response.length > 0){
-                  addShoopingList(cartVal)  
+            .then(function (response) {
+                if (response.length > 0) {
+                    addShoopingList(cartVal)
                 } else {
                     itemNotAValidInput()
                 }
-    })
+            })
 
     }
 })
 
-function addShoopingList(item){
+function addShoopingList(item) {
     var listCont = $(".shopping-container")
     var list = $("<li>").text(item)
     listCont.prepend(list)
 }
 
-function itemNotAValidInput(){
+function itemNotAValidInput() {
     var alertCont = $("<div>").addClass("callout small alert")
     var alertMessage = $("<h5>").text("Please input a real ingredient")
     alertCont.append(alertMessage)
     shoppingModal.append(alertCont)
 
-    var secondsLeftCart = 5 
-    var timerInterval = setInterval(function() { 
+    var secondsLeftCart = 5
+    var timerInterval = setInterval(function () {
         secondsLeftCart--
         console.log(secondsLeftCart)
-        if(secondsLeftCart === 0){ 
+        if (secondsLeftCart === 0) {
             clearInterval(timerInterval)
             alertCont.remove()
         }
     }, 1000)
 }
+
 
 //generate recipes section
 
@@ -216,3 +217,4 @@ function generateRecipeCards(data) {
 
 // var pageHeader = $("<h2>").text("Recepies Below: ").addClass("container")
 //     // var containerContent
+

@@ -64,7 +64,7 @@ button {
     cursor: pointer;
 }
 
-button:hover{
+button:hover {
     cursor: pointer;
 }
 
@@ -89,6 +89,7 @@ button:hover{
     width: 80%;
 }
 
+
 .hero-body {
     height: 20px;
 }
@@ -96,4 +97,5 @@ button:hover{
 .title {
    text-align: center;
 }
+
 
