@@ -216,20 +216,37 @@ function generateRecipeCards(data) {
    
 
     for (var i = 0; i < data.length; i++) {
-       
-    var cards = $("<div>").addClass("box column is-one-third");
-    cards.css('background-color', '#00FFAC');
-    var title = $("<h3>").text(data[i].title).addClass("box has-text-black has-text-centered");
-    var img = $("<img>").attr("src", data[i].image).addClass("has-background-warning-light image is-50x50"); 
-     
-    
-    cards.append(title, img);
-    cardContanier.append(cards);
+        
+        var cards = $("<div>").addClass("box column is-one-third");
+        cards.css('background-color', '#00FFAC');
+        var title = $("<h3>").text(data[i].title).addClass("box has-text-black has-text-centered");
+        var img = $("<img>").attr("src", data[i].image).addClass("has-background-warning-light image is-50x50"); 
+        
+        var missing = $("<h2>").text("Ingredients needed: ")
+
+        for (var j = 0; j < data[i].missedIngredients.length; j ++) {
+              missing.append($("<h2>").text(data[i].missedIngredients[j].name));
+            
+        }
+        
+        
+        
+        cards.append(title, img, missing, used);
+        cardContanier.append(cards);
 
     }
 }
 
 
+
+
+// function generateMissUsed (data) {
+// for (var j = 0; j < data.length; j ++) {
+//     var missing = $("<h2>").text("Ingredients needed: "  + data[j].missedIngredients[j].name);
+//     var used = $("<h2>").text("Ingredients used from pantry: " + data[j].usedIngredients[j].name);
+//     }
+// }
+// console.log(generateMissUsed(data));
 
 
 // var pageHeader = $("<h2>").text("Recepies Below: ").addClass("container")
