@@ -14,47 +14,52 @@
 </head>
 
 <body>
+    <div id="landingpage">
+        <canvas id="canvas-image-blending"></canvas>
+    </div>
+
     <header>
-        <button id="cart">Shopping Cart</button>
-        <div id="cartModal" class="shoppingModal">
-            <div class="shoppingModalContent">
-                <span class="close">&times;</span>
-                <div class="shoppingNeeds">
-                    <label for="itemNeeds">Enter items needed:</label>
-                    <input type="text" id="addCartBar" name="cartSearch" value=" ">
-                    <button type="button" id="addCartBtn">Add item</button>
-                </div>
-                <div class="cart-list">
-                    <h5>Current items in shopping cart</h5>
-                    <ul class="shopping-container"></ul>
+        <div id="secondPage">
+            <button id="cart">Shopping Cart</button>
+            <div id="cartModal" class="shoppingModal">
+                <div class="shoppingModalContent">
+                    <span class="close">&times;</span>
+                    <div class="shoppingNeeds">
+                        <label for="itemNeeds">Enter items needed:</label>
+                        <input type="text" id="addCartBar" name="cartSearch" value=" ">
+                        <button type="button" id="addCartBtn">Add item</button>
+                    </div>
+                    <div class="cart-list">
+                        <h5>Current items in shopping cart</h5>
+                        <ul class="shopping-container"></ul>
+                    </div>
                 </div>
             </div>
-        </div>
 
 
-        <div>My Cookbook</div>
-        <button id="pantry">What's in my pantry</button>
-        <div id="pantryModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <div class="pantry-search">
-                    <label for="itemSearch">Enter the ingredients you have here</label>
-                    <input type="text" id="addItemBar" name="itemSearch" value="Apple">
-                    <button type="button" id="addItemBtn">Add item</button>
-                    <div id="btnholder"><button>Generate Recipes</button></div>
-                </div>
-                <div class="pantry-list">
-                    <h5>Current ingredients in pantry</h5>
-                    <ul class="ingredients-container"></ul>
+            <div>My Cookbook</div>
+            <button id="pantry">What's in my pantry</button>
+            <div id="pantryModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <div class="pantry-search">
+                        <label for="itemSearch">Enter the ingredients you have here</label>
+                        <input type="text" id="addItemBar" name="itemSearch" value="Apple">
+                        <button type="button" id="addItemBtn">Add item</button>
+                        <div id="btnholder"><button>Generate Recipes</button></div>
+                    </div>
+                    <div class="pantry-list">
+                        <h5>Current ingredients in pantry</h5>
+                        <ul class="ingredients-container"></ul>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
- 
-
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/granim/2.0.0/granim.js"></script>
     <script src="./assets/js/vendor/what-input.js"></script>
     <script src="./assets/js/vendor/foundation.min.js"></script>
     <script src="./assets/js/script.js"></script>
