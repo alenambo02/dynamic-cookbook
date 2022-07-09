@@ -1,8 +1,15 @@
 var pantryModal = $('#pantryModal')
+var ingredientList = []
+if(localStorage.getItem("pantryIngredients")){ //Check if there is any stored history to grab
+    ingredientList = JSON.parse(localStorage.getItem("pantryIngredients"))
+}
+
+console.log(queryStringifyIngredients())
 
 /* Open and close pantry modal*/
 $(document).on("click", "#pantry", function (event) {
     pantryModal.css("display", "block")
+    displayPantryIngredietns()
 });
 
 $(document).on("click", ".close", function () {
@@ -22,7 +29,7 @@ $(document).on("click", "#addItemBtn", function (event) { //Add ingredient liste
             .then(function (response) {
                 if (response.length > 0) { //Real items will return an array with at least 1 element
                     //console.log("real ingredient")
-                    addPantryIngredient(itemVal)
+                    addPantryIngredient(response[0].name.charAt(0).toUpperCase() + response[0].name.slice(1))
                 } else { //Fake items will return an empty array
                     fakeItemAlert() //Notify user that it is a fake ingredient
                 }
@@ -30,10 +37,24 @@ $(document).on("click", "#addItemBtn", function (event) { //Add ingredient liste
     }
 })
 
-function addPantryIngredient(item) { //Add input into pantry list
+function addPantryIngredient(item){ //Add input into pantry list
+    if(ingredientList.includes(item)){
+        return
+    } else {
+        ingredientList.push(item)
+        localStorage.setItem("pantryIngredients", JSON.stringify(ingredientList))
+        displayPantryIngredietns()
+        console.log(item)
+    }
+}
+
+function displayPantryIngredietns(){
     var ingCont = $(".ingredients-container")
-    var ing = $("<li>").text(item)
-    ingCont.prepend(ing)
+    ingCont.empty()
+    for(var i = 0; i < ingredientList.length; i++){
+        var ing = $("<li>").text(ingredientList[i])
+        ingCont.prepend(ing)
+    }
 }
 
 function fakeItemAlert() { //Notify user that input is not a real ingredient
@@ -53,6 +74,20 @@ function fakeItemAlert() { //Notify user that input is not a real ingredient
         }
     }, 1000)
 }
+
+function queryStringifyIngredients(){
+    var rtn = ""
+    for(var i = 0; i < ingredientList.length; i++){
+        if(i==0){
+            rtn+= ingredientList[i]
+        } else {
+            rtn += ",+" + ingredientList[i]
+        }
+    }
+    return rtn
+}
+
+
 
 /* API ingredient check
 
