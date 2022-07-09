@@ -7,3 +7,9 @@ var granimInstance = new Granim({
     isPausedWhenNotInView: true,
 
 });
+
+
+
+$(".clickMe").on("click", function () {
+
+});
