@@ -107,9 +107,9 @@ function queryStringifyIngredients(){
     var rtn = ""
     for(var i = 0; i < ingredientList.length; i++){
         if(i==0){
-            rtn+= ingredientList[i]
+            rtn+= ingredientList[i].name
         } else {
-            rtn += ",+" + ingredientList[i]
+            rtn += ",+" + ingredientList[i].name
         }
     }
     return rtn
