@@ -64,7 +64,7 @@ button {
     cursor: pointer;
 }
 
-button:hover{
+button:hover {
     cursor: pointer;
 }
 
@@ -88,3 +88,4 @@ button:hover{
     border: 1px solid #888;
     width: 80%;
 }
+
