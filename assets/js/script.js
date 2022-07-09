@@ -47,12 +47,15 @@ function addPantryIngredient(item){ //Add input into pantry list
     if(ingredientList.includes(item)){
         return
     } else {
-        ingredientList.push(item)
-        ingredientCounts[item] = 1
-        console.log(ingredientCounts)
-        localStorage.setItem("pantryIngredientsCount", JSON.stringify(ingredientCounts))
+        var ingObj = {}
+        ingObj["name"] = item
+        ingObj["count"] = 1
+        ingredientList.push(ingObj)
+        //ingredientCounts[item] = 1
+        //console.log(ingredientCounts)
+        //localStorage.setItem("pantryIngredientsCount", JSON.stringify(ingredientCounts))
         localStorage.setItem("pantryIngredients", JSON.stringify(ingredientList))
-        displayPantryIngredietns()
+        //displayPantryIngredietns()
         console.log(item)
     }
 }
