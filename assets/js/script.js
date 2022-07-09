@@ -200,6 +200,7 @@ function generateRecipeCards(data) {
     for (var i = 0; i < data.length; i++) {
        
     var cards = $("<div>").addClass("box column is-one-third");
+    cards.css('background-color', '#5cd65c');
     var title = $("<h3>").text(data[0].title).addClass("has-text-danger-dark");
     var img = $("<img>").attr("src", data[0].image).addClass("image is-50x50"); 
      
