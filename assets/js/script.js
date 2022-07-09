@@ -22,6 +22,16 @@ $(document).on("click", ".close", function () {
     pantryModal.css("display", "none")
 });
 
+$(document).on("click", ".increase-count-btn", function(){
+    changeCount($(this).siblings(".name").html() ,"+")
+    
+})
+
+$(document).on("click", ".decrease-count-btn", function(){
+    changeCount($(this).siblings(".name").html() ,"-")
+    
+})
+
 /*Get List of ingredients*/
 
 $(document).on("click", "#addItemBtn", function (event) { //Add ingredient listener
@@ -74,7 +84,7 @@ function displayPantryIngredietns(){
     ingCont.empty() 
     for(var i = 0; i < ingredientList.length; i++){
         var ing = $("<div>").addClass("is-flex is-flex-direction-row is-align-content-center")
-        var name = $("<h5>").text(ingredientList[i].name)
+        var name = $("<h5>").text(ingredientList[i].name).addClass("name")
         var incBtn = $("<button>").text("+").addClass("button is-small is-info increase-count-btn")
         //console.log(ingredientList[i])
         //console.log(ingredientCounts.ingredientList[i])
@@ -83,6 +93,26 @@ function displayPantryIngredietns(){
         ing.append(name,incBtn,ingCount,decBtn)
         ingCont.prepend(ing)
     }
+}
+
+function changeCount(name, direction){
+    console.log(name, direction)
+    if(direction == "+"){
+        ingredientList[findObjectIndex(name)].count += 1
+    } else {
+        ingredientList[findObjectIndex(name)].count -= 1
+    }
+    displayPantryIngredietns()
+    
+}
+
+function findObjectIndex(name){
+    for(var i = 0; i < ingredientList.length; i++){
+        if(ingredientList[i].name == name){
+            return i
+        }
+    }
+    return -1
 }
 
 function fakeItemAlert() { //Notify user that input is not a real ingredient
