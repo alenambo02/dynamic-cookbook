@@ -44,7 +44,7 @@ $(document).on("click", "#addItemBtn", function (event) { //Add ingredient liste
 })
 
 function addPantryIngredient(item){ //Add input into pantry list
-    if(ingredientList.includes(item)){
+    if(includesIngredient(item)){
         return
     } else {
         var ingObj = {}
@@ -58,6 +58,15 @@ function addPantryIngredient(item){ //Add input into pantry list
         //displayPantryIngredietns()
         console.log(item)
     }
+}
+
+function includesIngredient(ingName){
+    for(var i = 0; i < ingredientList.length; i++){
+        if(ingredientList[i].name == ingName){
+            return true
+        }
+    }
+    return false
 }
 
 function displayPantryIngredietns(){
