@@ -159,19 +159,28 @@ var displayCards = $('#displaycardshere')
 
 
 
+
 //generate recipes btn
 $(document).on("click", "#generateRecipes", function (event) {
     displayCards.css("display", "block")
     var ingredientParse = queryStringifyIngredients()
 
-    var makeRecipes = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=c8ae3021308e4c6fa278becfa56df80b&ingredients=" + ingredientParse + "&number=15&ranking=2"
+    var makeRecipes = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=c8ae3021308e4c6fa278becfa56df80b&ingredients=" + ingredientParse + "&number=9&ranking=2"
     $.ajax({
         url:makeRecipes,
         method: "GET"
 
     })
         .then(function(response) {
+        
             console.log(response)
+            
+            // if (!response.length) {
+            //     console.log('No results found!');
+
+            // }
+        
+
     
         generateRecipeCards(response)
   
@@ -184,18 +193,21 @@ $(document).on("click", "#generateRecipes", function (event) {
 var cardContanier = $("#cardscontainer")
 
     
+    
 function generateRecipeCards(data) {
     
     
-    for(var i = 0; i < data.length; i++){
-    var cards = $("<div>").addClass("box column is-one-third");
-    var title = $("<h3>").text(data[0].title).addClass("has-text-danger-dark")
-    var img = $("<img>").attr("src", data[0].image).addClass("image is-50x50") 
-    }
-    
-    cards.append(title, img)
-    cardContanier.append(cards)
+    for (var i = 0; i < data.length; i++) {
 
+    var cards = $("<div>").addClass("box column is-one-third");
+    var title = $("<h3>").text(data[0].title).addClass("has-text-danger-dark");
+    var img = $("<img>").attr("src", data[0].image).addClass("image is-50x50"); 
+    
+    
+    cards.append(title, img);
+    cardContanier.append(cards);
+
+    }
 }
 
 
