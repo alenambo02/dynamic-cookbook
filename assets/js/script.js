@@ -73,13 +73,13 @@ function displayPantryIngredietns(){
     var ingCont = $(".ingredients-container")
     ingCont.empty() 
     for(var i = 0; i < ingredientList.length; i++){
-        var ing = $("<div>").addClass("is-flex-direction-row")
-        var name = $("<h5>").text(ingredientList[i])
-        var incBtn = $("<button>").text("+").addClass("increase-count-btn")
+        var ing = $("<div>").addClass("is-flex is-flex-direction-row is-align-content-center")
+        var name = $("<h5>").text(ingredientList[i].name)
+        var incBtn = $("<button>").text("+").addClass("button is-small is-info increase-count-btn")
         //console.log(ingredientList[i])
         //console.log(ingredientCounts.ingredientList[i])
-        var ingCount = $("<h5>").text(ingredientCounts[ingredientList[i]])
-        var decBtn = $("<button>").text("-").addClass("decrease-count-btn")
+        var ingCount = $("<h5>").text(ingredientList[i].count)
+        var decBtn = $("<button>").text("-").addClass("button is-small is-danger decrease-count-btn")
         ing.append(name,incBtn,ingCount,decBtn)
         ingCont.prepend(ing)
     }
