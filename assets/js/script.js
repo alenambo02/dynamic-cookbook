@@ -1,9 +1,15 @@
 var pantryModal = $('#pantryModal')
 var ingredientList = []
+var ingredientCounts = {}
 if(localStorage.getItem("pantryIngredients")){ //Check if there is any stored history to grab
     ingredientList = JSON.parse(localStorage.getItem("pantryIngredients"))
 }
+if(localStorage.getItem("pantryIngredientsCount")){ //Check if there is any stored history to grab
+    console.log("reached")
+    ingredientCounts = JSON.parse(localStorage.getItem("pantryIngredientsCount"))
+}
 
+console.log(typeof(ingredientCounts), ingredientCounts)
 console.log(queryStringifyIngredients())
 
 /* Open and close pantry modal*/
@@ -42,6 +48,9 @@ function addPantryIngredient(item){ //Add input into pantry list
         return
     } else {
         ingredientList.push(item)
+        ingredientCounts[item] = 1
+        console.log(ingredientCounts)
+        localStorage.setItem("pantryIngredientsCount", JSON.stringify(ingredientCounts))
         localStorage.setItem("pantryIngredients", JSON.stringify(ingredientList))
         displayPantryIngredietns()
         console.log(item)
@@ -50,9 +59,16 @@ function addPantryIngredient(item){ //Add input into pantry list
 
 function displayPantryIngredietns(){
     var ingCont = $(".ingredients-container")
-    ingCont.empty()
+    ingCont.empty() 
     for(var i = 0; i < ingredientList.length; i++){
-        var ing = $("<li>").text(ingredientList[i])
+        var ing = $("<div>").addClass("is-flex-direction-row")
+        var name = $("<h5>").text(ingredientList[i])
+        var incBtn = $("<button>").text("+").addClass("increase-count-btn")
+        //console.log(ingredientList[i])
+        //console.log(ingredientCounts.ingredientList[i])
+        var ingCount = $("<h5>").text(ingredientCounts[ingredientList[i]])
+        var decBtn = $("<button>").text("-").addClass("decrease-count-btn")
+        ing.append(name,incBtn,ingCount,decBtn)
         ingCont.prepend(ing)
     }
 }
@@ -86,6 +102,7 @@ function queryStringifyIngredients(){
     }
     return rtn
 }
+
 
 
 
