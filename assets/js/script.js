@@ -161,7 +161,7 @@ var displayCards = $('#displaycardshere')
 
 //generate recipes btn
 $(document).on("click", "#generateRecipes", function (event) {
-    // displayCards.css("display", "block")
+    displayCards.css("display", "block")
     var ingredientParse = queryStringifyIngredients()
 
     var makeRecipes = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=c8ae3021308e4c6fa278becfa56df80b&ingredients=" + ingredientParse + "&number=15&ranking=2"
@@ -170,8 +170,7 @@ $(document).on("click", "#generateRecipes", function (event) {
         method: "GET"
 
     })
-        .then(function(response){
-           
+        .then(function(response) {
             console.log(response)
     
         generateRecipeCards(response)
@@ -182,19 +181,25 @@ $(document).on("click", "#generateRecipes", function (event) {
 
 
 
-
 var cardContanier = $("#cardscontainer")
 
-
+    
 function generateRecipeCards(data) {
-    var cards =$("<div>").addClass("container")
-    for(var i = 0; i < 7; i++){
-   
+    
+    
+    for(var i = 0; i < data.length; i++){
+    var cards = $("<div>").addClass("");
     var title = $("<h3>").text(data[0].title)
-    var img = $("<img>").attr("src", data[0].image)   
+    var img = $("<img>").attr("src", data[0].image);  
     }
     
     cards.append(title, img)
     cardContanier.append(cards)
 
 }
+
+
+
+
+// var pageHeader = $("<h2>").text("Recepies Below: ").addClass("container")
+//     // var containerContent
