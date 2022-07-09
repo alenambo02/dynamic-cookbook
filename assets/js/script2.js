@@ -11,5 +11,6 @@ var granimInstance = new Granim({
 
 
 $(".clickMe").on("click", function () {
-
+    window.location = "./index.html"
 });
+
