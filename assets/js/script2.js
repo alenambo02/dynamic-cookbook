@@ -6,7 +6,7 @@ var granimInstance = new Granim({
     direction: 'top-bottom',
     isPausedWhenNotInView: true,
     image: {
-        // source: './images/3.png',
+        source: './images/3.png',
         stretchMode: ["stretch-if-smaller", "stretch-if-smaller"],
 
         blendingMode: 'multiply',
@@ -23,7 +23,7 @@ var granimInstance = new Granim({
         }
     }
 });
-        
+
 
 $(".clickMe").on("click", function () {
     window.location = "./index.html"
