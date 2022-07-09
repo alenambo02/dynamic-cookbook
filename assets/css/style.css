@@ -1,7 +1,7 @@
 header {
     display: flex;
     justify-content: space-evenly;
-    background-color: coral;
+    background-color: rgb(255, 150, 112);
     height: 50px;
     margin: 0px;
     align-items: center;
@@ -13,7 +13,7 @@ body {
 }
 
 button {
-    background-color: lemonchiffon;
+    background-color: rgb(255, 248, 181);
     border-radius: 5%;
     padding: 6px;
     border: none;
@@ -88,4 +88,14 @@ button:hover {
     border: 1px solid #888;
     width: 80%;
 }
+
+
+.hero-body {
+    height: 20px;
+}
+
+.title {
+   text-align: center;
+}
+
 

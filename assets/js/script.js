@@ -100,7 +100,7 @@ https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=597241d5914540e
 //shopping modal 
 var shoppingModal = $('#cartModal')
 
-/* Open and close pantry modal*/
+/* Open and close shopping modal*/
 $(document).on("click", "#cart", function (event) {
     shoppingModal.css("display", "block")
 });
@@ -151,4 +151,70 @@ function itemNotAValidInput() {
     }, 1000)
 }
 
+
+//generate recipes section
+
+var recipesBtn = $('#generateRecipes')
+
+var displayCards = $('#displaycardshere')
+
+
+
+
+//generate recipes btn
+$(document).on("click", "#generateRecipes", function (event) {
+    displayCards.css("display", "block")
+    var ingredientParse = queryStringifyIngredients()
+
+    var makeRecipes = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=945c0458a68b49e7a3fb5666d1cdd990&ingredients=" + ingredientParse + "&number=9&ranking=2"
+    $.ajax({
+        url:makeRecipes,
+        method: "GET"
+
+    })
+        .then(function(response) {
+        
+            console.log(response)
+            
+            // if (!response.length) {
+            //     console.log('No results found!');
+
+            // }
+        
+
+    
+        generateRecipeCards(response)
+  
+        })
+
+});
+
+
+
+var cardContanier = $("#cardscontainer")
+
+    
+    
+function generateRecipeCards(data) {
+   
+
+    for (var i = 0; i < data.length; i++) {
+       
+    var cards = $("<div>").addClass("box column is-one-third");
+    cards.css('background-color', '#00FFAC');
+    var title = $("<h3>").text(data[i].title).addClass("box has-text-black has-text-centered");
+    var img = $("<img>").attr("src", data[i].image).addClass("has-background-warning-light image is-50x50"); 
+     
+    
+    cards.append(title, img);
+    cardContanier.append(cards);
+
+    }
+}
+
+
+
+
+// var pageHeader = $("<h2>").text("Recepies Below: ").addClass("container")
+//     // var containerContent
 
