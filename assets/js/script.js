@@ -165,7 +165,7 @@ $(document).on("click", "#generateRecipes", function (event) {
     displayCards.css("display", "block")
     var ingredientParse = queryStringifyIngredients()
 
-    var makeRecipes = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=c8ae3021308e4c6fa278becfa56df80b&ingredients=" + ingredientParse + "&number=9&ranking=2"
+    var makeRecipes = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=945c0458a68b49e7a3fb5666d1cdd990&ingredients=" + ingredientParse + "&number=9&ranking=2"
     $.ajax({
         url:makeRecipes,
         method: "GET"
@@ -196,13 +196,13 @@ var cardContanier = $("#cardscontainer")
     
 function generateRecipeCards(data) {
    
-    
+
     for (var i = 0; i < data.length; i++) {
        
     var cards = $("<div>").addClass("box column is-one-third");
     cards.css('background-color', '#5cd65c');
-    var title = $("<h3>").text(data[0].title).addClass("has-text-danger-dark");
-    var img = $("<img>").attr("src", data[0].image).addClass("image is-50x50"); 
+    var title = $("<h3>").text(data[i].title).addClass("has-text-danger-dark");
+    var img = $("<img>").attr("src", data[i].image).addClass("image is-50x50"); 
      
     
     cards.append(title, img);
