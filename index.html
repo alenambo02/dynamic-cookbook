@@ -5,16 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My cookbook</title>
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="./assets/css/reset.css" />
-    <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
-
-
+    <link rel="stylesheet" type="text/css" href="./assets/css/style2.css">
+    <title>Dynamic-Cookbook</title>
 </head>
 
 <body>
+
     <header>
         <button id="cart">Shopping Cart</button>
         <div id="cartModal" class="shoppingModal">
@@ -39,14 +35,25 @@
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <div class="pantry-search">
-                    <label for="itemSearch">Enter the ingredients you have here</label>
-                    <input type="text" id="addItemBar" name="itemSearch" value="Apple">
-                    <button type="button" id="addItemBtn">Add item</button>
-                    <div id="generateRecipes"><button>Generate Recipes</button></div>
+                    <label class="mb-2 is-size-3" for="itemSearch">Enter the ingredients you have here</label>
+                    <input type="text" class="input is-link mb-2" id="addItemBar" name="itemSearch" value="Apple">
+                    <button type="button" class="mb-2 button is-size-6 is-small is-fullwidth is-warning" id="addItemBtn">Add item</button>
+                    <div id="generateRecipes" class="mb-1"><button>Generate Recipes</button></div>
                 </div>
-                <div class="pantry-list">
-                    <h5>Current ingredients in pantry</h5>
-                    <ul class="ingredients-container"></ul>
+                <div class="pantry-list  is-flex is-flex-direction-column is-align-content-center">
+                    <h5 class="is-size-4">Current ingredients in pantry</h5>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Delete</th>
+                                <th>Name</th>
+                                <th>Increase</th>
+                                <th>Amount</th>
+                                <th>Decrease</th>
+                            </tr>
+                        </thead>
+                        <tbody class="ingredients-container"></tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -75,12 +82,20 @@
  
 
 
+    <div class="wrapper">
+        <canvas id="granim"></canvas>
+        <!-- <div class="clickMeBtn"> -->
+        <!-- <a href="./index.html" id="violet-state-cta" class="clickMe">Violet state </a> --> -->
+    </div>
 
 
+    <div id="clickbtn">
+        <button href="./index2.html" class="clickMe">Click Me</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/granim/2.0.0/granim.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  
-    <script src="./assets/js/script.js"></script>
-
+    <script src="./assets/js/script2.js"></script>
 </body>
 
 </html>

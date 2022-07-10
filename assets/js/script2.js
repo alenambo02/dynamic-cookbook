@@ -26,13 +26,13 @@
 
 
 $(".clickMe").on("click", function () {
-    window.location = "./index.html"
+    window.location = "./index2.html"
 });
 
 var granimInstance = new Granim({
     element: '#granim',
     direction: 'top-bottom',
-  
+
     isPausedWhenNotInView: true,
     image: {
         source: './images/5.png',
@@ -50,5 +50,4 @@ var granimInstance = new Granim({
             transitionSpeed: 7000
         }
     }
- });
- 
+});

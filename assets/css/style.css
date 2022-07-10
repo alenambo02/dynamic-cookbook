@@ -12,12 +12,14 @@ body {
 
 }
 
+/*
 button {
     background-color: rgb(255, 248, 181);
     border-radius: 5%;
     padding: 6px;
     border: none;
 }
+*/
 
 #btnholder {
     display: flex;
@@ -98,6 +100,7 @@ button:hover {
    text-align: center;
 }
 
+
 .box {
     width: 200px;
     height: 80px;
@@ -121,3 +124,10 @@ h3 {
     height: 300px;
     width: 300px;
 } */
+
+.pantry-search{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
