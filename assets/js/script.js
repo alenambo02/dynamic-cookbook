@@ -1,16 +1,10 @@
 var pantryModal = $('#pantryModal')
 var ingredientList = []
-var ingredientCounts = {}
 if(localStorage.getItem("pantryIngredients")){ //Check if there is any stored history to grab
     ingredientList = JSON.parse(localStorage.getItem("pantryIngredients"))
 }
-if(localStorage.getItem("pantryIngredientsCount")){ //Check if there is any stored history to grab
-    console.log("reached")
-    ingredientCounts = JSON.parse(localStorage.getItem("pantryIngredientsCount"))
-}
 
-console.log(typeof(ingredientCounts), ingredientCounts)
-console.log(queryStringifyIngredients())
+//console.log(queryStringifyIngredients())
 
 /* Open and close pantry modal*/
 $(document).on("click", "#pantry", function (event) {
@@ -122,19 +116,20 @@ function changeCount(name, direction){
 
 function deleteItemInPantry(name){
     var i = findObjectIndex(name)
-    if(i > 0){
+    if(i > -1){
         ingredientList.splice(i,1)
     }
+    saveIngredientList()
     displayPantryIngredietns()
 }
 
 function findObjectIndex(name){
     for(var i = 0; i < ingredientList.length; i++){
         if(ingredientList[i].name == name){
+            console.log("Found " + name, " at index" + i)
             return i
         }
     }
-    console.log("couldnt find first ing")
     return -1
 }
 
