@@ -29,9 +29,11 @@ $(document).on("click", ".increase-count-btn", function(){
 
 $(document).on("click", ".decrease-count-btn", function(){
     changeCount($(this).parent().siblings(".name").html() ,"-")
-    
 })
 
+$(document).on("click", ".delete-ing-btn", function(){
+    deleteItemInPantry($(this).parent().siblings(".name").html())
+})
 /*Get List of ingredients*/
 
 $(document).on("click", "#addItemBtn", function (event) { //Add ingredient listener
@@ -88,6 +90,9 @@ function displayPantryIngredietns(){
     ingCont.empty() 
     for(var i = 0; i < ingredientList.length; i++){
         var ing = $("<tr>")
+        var delBtnCont = $("<td>")
+        var deleteBtn = $("<button>").text("del").addClass("button is-small is-danger delete-ing-btn")
+        delBtnCont.append(deleteBtn)
         var name = $("<th>").text(ingredientList[i].name).addClass("name")
         var iBtnCont = $("<td>")
         var incBtn = $("<button>").text("+").addClass("button is-small is-info is-light increase-count-btn")
@@ -98,7 +103,7 @@ function displayPantryIngredietns(){
         var dBtnCont = $("<td>")
         var decBtn = $("<button>").text("-").addClass("button is-small is-danger is-light decrease-count-btn")
         dBtnCont.append(decBtn)
-        ing.append(name,iBtnCont,ingCount,dBtnCont)
+        ing.append(delBtnCont,name,iBtnCont,ingCount,dBtnCont)
         ingCont.prepend(ing)
     }
 }
@@ -115,12 +120,21 @@ function changeCount(name, direction){
     
 }
 
+function deleteItemInPantry(name){
+    var i = findObjectIndex(name)
+    if(i > 0){
+        ingredientList.splice(i,1)
+    }
+    displayPantryIngredietns()
+}
+
 function findObjectIndex(name){
     for(var i = 0; i < ingredientList.length; i++){
         if(ingredientList[i].name == name){
             return i
         }
     }
+    console.log("couldnt find first ing")
     return -1
 }
 
