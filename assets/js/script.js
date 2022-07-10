@@ -1,18 +1,15 @@
 var pantryModal = $('#pantryModal')
 var ingredientList = []
+
+if(localStorage.getItem("pantryIngredients")){ //Check if there is any stored history to grab
+    ingredientList = JSON.parse(localStorage.getItem("pantryIngredients"))
+}
+
+//console.log(queryStringifyIngredients())
+
 var ingredientCounts = {}
 var shoopingList = []
 var shoopingCounts = {}
-if (localStorage.getItem("pantryIngredients")) { //Check if there is any stored history to grab
-    ingredientList = JSON.parse(localStorage.getItem("pantryIngredients"))
-}
-if (localStorage.getItem("pantryIngredientsCount")) { //Check if there is any stored history to grab
-    console.log("reached")
-    ingredientCounts = JSON.parse(localStorage.getItem("pantryIngredientsCount"))
-}
-
-console.log(typeof (ingredientCounts), ingredientCounts)
-console.log(queryStringifyIngredients())
 
 /* Open and close pantry modal*/
 $(document).on("click", "#pantry", function (event) {
@@ -24,6 +21,18 @@ $(document).on("click", ".close", function () {
     pantryModal.css("display", "none")
 });
 
+$(document).on("click", ".increase-count-btn", function(){
+    changeCount($(this).parent().siblings(".name").html() ,"+")
+    
+})
+
+$(document).on("click", ".decrease-count-btn", function(){
+    changeCount($(this).parent().siblings(".name").html() ,"-")
+})
+
+$(document).on("click", ".delete-ing-btn", function(){
+    deleteItemInPantry($(this).parent().siblings(".name").html())
+})
 /*Get List of ingredients*/
 
 $(document).on("click", "#addItemBtn", function (event) { //Add ingredient listener
@@ -45,34 +54,90 @@ $(document).on("click", "#addItemBtn", function (event) { //Add ingredient liste
     }
 })
 
-function addPantryIngredient(item) { //Add input into pantry list
-    if (ingredientList.includes(item)) {
+
+function addPantryIngredient(item){ //Add input into pantry list
+    if(includesIngredient(item)){
         return
     } else {
-        ingredientList.push(item)
-        ingredientCounts[item] = 1
-        console.log(ingredientCounts)
-        localStorage.setItem("pantryIngredientsCount", JSON.stringify(ingredientCounts))
-        localStorage.setItem("pantryIngredients", JSON.stringify(ingredientList))
+        var ingObj = {}
+        ingObj["name"] = item
+        ingObj["count"] = 1
+        ingredientList.push(ingObj)
+        //ingredientCounts[item] = 1
+        //console.log(ingredientCounts)
+        //localStorage.setItem("pantryIngredientsCount", JSON.stringify(ingredientCounts))
+        saveIngredientList()
         displayPantryIngredietns()
         console.log(item)
     }
 }
 
-function displayPantryIngredietns() {
+
+function saveIngredientList(){
+    localStorage.setItem("pantryIngredients", JSON.stringify(ingredientList))
+}
+
+function includesIngredient(ingName){
+    for(var i = 0; i < ingredientList.length; i++){
+        if(ingredientList[i].name == ingName){
+            return true
+        }
+    }
+    return false
+}
+
+function displayPantryIngredietns(){
     var ingCont = $(".ingredients-container")
-    ingCont.empty()
-    for (var i = 0; i < ingredientList.length; i++) {
-        var ing = $("<div>").addClass("is-flex-direction-row")
-        var name = $("<h5>").text(ingredientList[i])
-        var incBtn = $("<button>").text("+").addClass("increase-count-btn")
+    ingCont.empty() 
+    for(var i = 0; i < ingredientList.length; i++){
+        var ing = $("<tr>")
+        var delBtnCont = $("<td>")
+        var deleteBtn = $("<button>").text("del").addClass("button is-small is-danger delete-ing-btn")
+        delBtnCont.append(deleteBtn)
+        var name = $("<th>").text(ingredientList[i].name).addClass("name")
+        var iBtnCont = $("<td>")
+        var incBtn = $("<button>").text("+").addClass("button is-small is-info is-light increase-count-btn")
+        iBtnCont.append(incBtn)
         //console.log(ingredientList[i])
         //console.log(ingredientCounts.ingredientList[i])
-        var ingCount = $("<h5>").text(ingredientCounts[ingredientList[i]])
-        var decBtn = $("<button>").text("-").addClass("decrease-count-btn")
-        ing.append(name, incBtn, ingCount, decBtn)
+        var ingCount = $("<td>").text(ingredientList[i].count)
+        var dBtnCont = $("<td>")
+        var decBtn = $("<button>").text("-").addClass("button is-small is-danger is-light decrease-count-btn")
+        dBtnCont.append(decBtn)
+        ing.append(delBtnCont,name,iBtnCont,ingCount,dBtnCont)
         ingCont.prepend(ing)
     }
+}
+
+function changeCount(name, direction){
+    console.log(name, direction)
+    if(direction == "+"){
+        ingredientList[findObjectIndex(name)].count += 1
+    } else if(ingredientList[findObjectIndex(name)].count > 1){
+        ingredientList[findObjectIndex(name)].count -= 1
+    }
+    saveIngredientList()
+    displayPantryIngredietns()
+    
+}
+
+function deleteItemInPantry(name){
+    var i = findObjectIndex(name)
+    if(i > -1){
+        ingredientList.splice(i,1)
+    }
+    saveIngredientList()
+    displayPantryIngredietns()
+}
+
+function findObjectIndex(name){
+    for(var i = 0; i < ingredientList.length; i++){
+        if(ingredientList[i].name == name){
+            console.log("Found " + name, " at index" + i)
+            return i
+        }
+    }
+    return -1
 }
 
 function fakeItemAlert() { //Notify user that input is not a real ingredient
@@ -95,11 +160,11 @@ function fakeItemAlert() { //Notify user that input is not a real ingredient
 
 function queryStringifyIngredients() {
     var rtn = ""
-    for (var i = 0; i < ingredientList.length; i++) {
-        if (i == 0) {
-            rtn += ingredientList[i]
+    for(var i = 0; i < ingredientList.length; i++){
+        if(i==0){
+            rtn+= ingredientList[i].name
         } else {
-            rtn += ",+" + ingredientList[i]
+            rtn += ",+" + ingredientList[i].name
         }
     }
     return rtn
