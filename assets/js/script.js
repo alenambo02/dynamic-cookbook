@@ -167,6 +167,21 @@ function addShoopingList(item){ //Add input into pantry list
     }
 }
 
+function displayShoopingIngredietns(){
+    var shpngCont = $(".shopping-container")
+    shpngCont.empty() 
+    for(var i = 0; i < shoopingList.length; i++){
+        var shopng = $("<div>").addClass("is-flex-direction-row")
+        var name = $("<h5>").text(shoopingList[i])
+        var incBtn = $("<button>").text("+").addClass("increase-count-btn")
+        //console.log(ingredientList[i])
+        //console.log(ingredientCounts.ingredientList[i])
+        var ingCount = $("<h5>").text(shoopingList[shoopingList[i]])
+        var decBtn = $("<button>").text("-").addClass("decrease-count-btn")
+        shopng.append(name,incBtn,ingCount,decBtn)
+        shpngCont.prepend(ing)
+    }
+}
 
 function itemNotAValidInput() {
     var alertCont = $("<div>").addClass("callout small alert")
