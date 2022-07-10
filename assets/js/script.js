@@ -172,10 +172,11 @@ function displayShoopingIngredietns() {
     shpngCont.empty()
 
     for (var i = 0; i < shoopingList.length; i++) {
-        debugger
+        // debugger
         var shopng = $("<div>").addClass("is-flex-direction-row")
         var name = $("<h5>").text(shoopingList[i])
-        var incBtn = $("<button>").text("+").addClass("increase-count-btn")
+        var incBtn = $("<button>").text("+").addClass("increase-count-btn").attr('id', 'addBtn')
+
         //console.log(ingredientList[i])
         //console.log(ingredientCounts.ingredientList[i])
         var ingCount = $("<h5>").text(shoopingCounts[shoopingList[i]])
@@ -184,6 +185,17 @@ function displayShoopingIngredietns() {
         shpngCont.prepend(shopng)
     }
 }
+
+$(document).on("click", "#cart", function (event) {
+    cartModal.css("display", "block")
+    displayShoopingIngredietns()
+});
+
+$(document).on("click", "#addBtn", function (event) {
+    console.log("imhere")
+    // pantryModal.css("display", "block")
+    // displayPantryIngredietns()
+});
 
 function itemNotAValidInput() {
     var alertCont = $("<div>").addClass("callout small alert")
