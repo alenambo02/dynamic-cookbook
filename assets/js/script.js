@@ -264,11 +264,30 @@ $(document).on("click", "#cart", function (event) {
     displayShoopingIngredietns()
 });
 
-$(document).on("click", "#addBtn", function (event) {
-    console.log("imhere")
-    // pantryModal.css("display", "block")
-    // displayPantryIngredietns()
+$(document).on("click", ".close", function () {
+    // cartModal.css("display", "none")
 });
+
+$(document).on("click", ".increase-count-btn", function () {
+    changeCount($(this).parent().siblings(".name").html(), "+")
+
+})
+
+$(document).on("click", ".decrease-count-btn", function () {
+    changeCount($(this).parent().siblings(".name").html(), "-")
+})
+
+$(document).on("click", ".delete-ing-btn", function () {
+    deleteItemInPantry($(this).parent().siblings(".name").html())
+})
+
+$(document).on("click", "#addBtn", function (event) {
+    //     console.log("imhere")
+    //     // pantryModal.css("display", "block")
+    //     // displayPantryIngredietns()
+});
+
+
 
 function itemNotAValidInput() {
     var alertCont = $("<div>").addClass("callout small alert")
