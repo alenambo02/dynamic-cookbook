@@ -98,9 +98,11 @@ button:hover {
    text-align: center;
 }
 
-
-
-
+.box {
+    width: 200px;
+    height: 80px;
+    
+} 
 
 h2 {
     background-color: #397e28;

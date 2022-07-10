@@ -213,7 +213,7 @@ function generateRecipeCards(data) {
         
         var cards = $("<div>").addClass("card card-shadow-is-1em p-5");
         cards.css('background-color', '#aae39c');
-        var title = $("<h3>").text(data[i].title).addClass(" has-text-centered");
+        var title = $("<h3>").text(data[i].title).addClass("box has-text-centered");
         var img = $("<img>").attr("src", data[i].image).addClass("image is-fullwidth card-image is-clickable"); 
         img.attr("data-id", data[i].id)
         var missing = $("<h2>").text("Ingredients needed: ")
