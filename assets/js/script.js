@@ -1,7 +1,7 @@
 var pantryModal = $('#pantryModal')
 var ingredientList = []
 
-if(localStorage.getItem("pantryIngredients")){ //Check if there is any stored history to grab
+if (localStorage.getItem("pantryIngredients")) { //Check if there is any stored history to grab
     ingredientList = JSON.parse(localStorage.getItem("pantryIngredients"))
 }
 
@@ -10,6 +10,10 @@ if(localStorage.getItem("pantryIngredients")){ //Check if there is any stored hi
 var ingredientCounts = {}
 var shoopingList = []
 var shoopingCounts = {}
+
+if (localStorage.getItem("shoopingIngredients")) { //Check if there is any stored history to grab
+    shoopingList = JSON.parse(localStorage.getItem("shoopingIngredients"))
+}
 
 /* Open and close pantry modal*/
 $(document).on("click", "#pantry", function (event) {
@@ -21,16 +25,16 @@ $(document).on("click", ".close", function () {
     pantryModal.css("display", "none")
 });
 
-$(document).on("click", ".increase-count-btn", function(){
-    changeCount($(this).parent().siblings(".name").html() ,"+")
-    
+$(document).on("click", ".increase-count-btn", function () {
+    changeCount($(this).parent().siblings(".name").html(), "+")
+
 })
 
-$(document).on("click", ".decrease-count-btn", function(){
-    changeCount($(this).parent().siblings(".name").html() ,"-")
+$(document).on("click", ".decrease-count-btn", function () {
+    changeCount($(this).parent().siblings(".name").html(), "-")
 })
 
-$(document).on("click", ".delete-ing-btn", function(){
+$(document).on("click", ".delete-ing-btn", function () {
     deleteItemInPantry($(this).parent().siblings(".name").html())
 })
 /*Get List of ingredients*/
@@ -55,8 +59,8 @@ $(document).on("click", "#addItemBtn", function (event) { //Add ingredient liste
 })
 
 
-function addPantryIngredient(item){ //Add input into pantry list
-    if(includesIngredient(item)){
+function addPantryIngredient(item) { //Add input into pantry list
+    if (includesIngredient(item)) {
         return
     } else {
         var ingObj = {}
@@ -73,23 +77,27 @@ function addPantryIngredient(item){ //Add input into pantry list
 }
 
 
-function saveIngredientList(){
+function saveIngredientList() {
     localStorage.setItem("pantryIngredients", JSON.stringify(ingredientList))
 }
 
-function includesIngredient(ingName){
-    for(var i = 0; i < ingredientList.length; i++){
-        if(ingredientList[i].name == ingName){
+function saveShoopingList() {
+    localStorage.setItem("shoopingIngredients", JSON.stringify(shoopingList))
+}
+
+function includesIngredient(ingName) {
+    for (var i = 0; i < ingredientList.length; i++) {
+        if (ingredientList[i].name == ingName) {
             return true
         }
     }
     return false
 }
 
-function displayPantryIngredietns(){
+function displayPantryIngredietns() {
     var ingCont = $(".ingredients-container")
-    ingCont.empty() 
-    for(var i = 0; i < ingredientList.length; i++){
+    ingCont.empty()
+    for (var i = 0; i < ingredientList.length; i++) {
         var ing = $("<tr>")
         var delBtnCont = $("<td>")
         var deleteBtn = $("<button>").text("del").addClass("button is-small is-danger delete-ing-btn")
@@ -104,35 +112,35 @@ function displayPantryIngredietns(){
         var dBtnCont = $("<td>")
         var decBtn = $("<button>").text("-").addClass("button is-small is-danger is-light decrease-count-btn")
         dBtnCont.append(decBtn)
-        ing.append(delBtnCont,name,iBtnCont,ingCount,dBtnCont)
+        ing.append(delBtnCont, name, iBtnCont, ingCount, dBtnCont)
         ingCont.prepend(ing)
     }
 }
 
-function changeCount(name, direction){
+function changeCount(name, direction) {
     console.log(name, direction)
-    if(direction == "+"){
+    if (direction == "+") {
         ingredientList[findObjectIndex(name)].count += 1
-    } else if(ingredientList[findObjectIndex(name)].count > 1){
+    } else if (ingredientList[findObjectIndex(name)].count > 1) {
         ingredientList[findObjectIndex(name)].count -= 1
     }
     saveIngredientList()
     displayPantryIngredietns()
-    
+
 }
 
-function deleteItemInPantry(name){
+function deleteItemInPantry(name) {
     var i = findObjectIndex(name)
-    if(i > -1){
-        ingredientList.splice(i,1)
+    if (i > -1) {
+        ingredientList.splice(i, 1)
     }
     saveIngredientList()
     displayPantryIngredietns()
 }
 
-function findObjectIndex(name){
-    for(var i = 0; i < ingredientList.length; i++){
-        if(ingredientList[i].name == name){
+function findObjectIndex(name) {
+    for (var i = 0; i < ingredientList.length; i++) {
+        if (ingredientList[i].name == name) {
             console.log("Found " + name, " at index" + i)
             return i
         }
@@ -160,9 +168,9 @@ function fakeItemAlert() { //Notify user that input is not a real ingredient
 
 function queryStringifyIngredients() {
     var rtn = ""
-    for(var i = 0; i < ingredientList.length; i++){
-        if(i==0){
-            rtn+= ingredientList[i].name
+    for (var i = 0; i < ingredientList.length; i++) {
+        if (i == 0) {
+            rtn += ingredientList[i].name
         } else {
             rtn += ",+" + ingredientList[i].name
         }
@@ -252,7 +260,7 @@ function displayShoopingIngredietns() {
 }
 
 $(document).on("click", "#cart", function (event) {
-    cartModal.css("display", "block")
+    // cartModal.css("display", "block")
     displayShoopingIngredietns()
 });
 
@@ -291,7 +299,7 @@ var displayCards = $('#displaycardshere')
 
 //generate recipes btn
 $(document).on("click", "#generateRecipes", function (event) {
-    
+
     var ingredientParse = queryStringifyIngredients()
 
     var makeRecipes = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=c8ae3021308e4c6fa278becfa56df80b&ingredients=" + ingredientParse + "&number=9&ranking=2"
@@ -304,10 +312,10 @@ $(document).on("click", "#generateRecipes", function (event) {
 
             console.log(response)
 
-            
-           
-        generateRecipeCards(response)
-  
+
+
+            generateRecipeCards(response)
+
 
         })
 
@@ -324,26 +332,26 @@ function generateRecipeCards(data) {
 
     for (var i = 0; i < data.length; i++) {
 
-        
+
         var cards = $("<div>").addClass("card card-shadow-is-1em p-5");
         cards.css('background-color', '#aae39c');
         var title = $("<h3>").text(data[i].title).addClass("box has-text-centered");
-        var img = $("<img>").attr("src", data[i].image).addClass("image is-fullwidth card-image is-clickable"); 
+        var img = $("<img>").attr("src", data[i].image).addClass("image is-fullwidth card-image is-clickable");
         img.attr("data-id", data[i].id)
         var missing = $("<h2>").text("Ingredients needed: ")
 
-        for (var j = 0; j < data[i].missedIngredients.length; j ++) {
-              missing.append($("<h2>").text(data[i].missedIngredients[j].name)).addClass("has-text-centered");
-            
-        }
-        var used = $("<h2>").text( "Ingredients used from pantry: ")
+        for (var j = 0; j < data[i].missedIngredients.length; j++) {
+            missing.append($("<h2>").text(data[i].missedIngredients[j].name)).addClass("has-text-centered");
 
-        for (var k = 0; k < data[i].usedIngredients.length; k ++) {   
+        }
+        var used = $("<h2>").text("Ingredients used from pantry: ")
+
+        for (var k = 0; k < data[i].usedIngredients.length; k++) {
             used.append($("<h2>").text(data[i].usedIngredients[k].name)).addClass(" has-text-centered");
         }
-        
-        
-        
+
+
+
         cards.append(title, img, missing, used);
         cardContanier.append(cards);
 
@@ -360,31 +368,31 @@ $(document).on("click", ".card-image", function (event) {
 
 function getRecipeUrl(id) {
 
-var getUrlLink = "https://api.spoonacular.com/recipes/" + id + "/information?apiKey=c8ae3021308e4c6fa278becfa56df80b"
+    var getUrlLink = "https://api.spoonacular.com/recipes/" + id + "/information?apiKey=c8ae3021308e4c6fa278becfa56df80b"
 
-$.ajax({
-    url: getUrlLink,
-    method: "GET"
-
-})
-    .then(function(response) {
-       
-
-        window.open(response.sourceUrl)
-        
-        console.log(response)
-        
-        // if (!response.length) {
-        //     console.log('No results found!');
-
-    
-
-
-     
-    
+    $.ajax({
+        url: getUrlLink,
+        method: "GET"
 
     })
-    
+        .then(function (response) {
+
+
+            window.open(response.sourceUrl)
+
+            console.log(response)
+
+            // if (!response.length) {
+            //     console.log('No results found!');
+
+
+
+
+
+
+
+        })
+
 }
 
 
