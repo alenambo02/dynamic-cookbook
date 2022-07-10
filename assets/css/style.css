@@ -98,4 +98,24 @@ button:hover {
    text-align: center;
 }
 
+/* #cardscontainer {
+    border-radius: 30;
+} */
+
+/* 
+#displaycardshere {
+    border-radius: 50px;
+} */
+
+h2 {
+    background-color: rgb(240, 210, 38);
+    color: black;
+
+}
+
+h3 {
+    font-weight: 200px;
+    color: black;
+}
+
 

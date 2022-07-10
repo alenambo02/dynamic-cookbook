@@ -217,18 +217,22 @@ function generateRecipeCards(data) {
 
     for (var i = 0; i < data.length; i++) {
         
-        var cards = $("<div>").addClass("box column is-one-third");
+        var cards = $("<div>").addClass("card card-content-padding-is-3.0rem");
         cards.css('background-color', '#00FFAC');
-        var title = $("<h3>").text(data[i].title).addClass("box has-text-black has-text-centered");
-        var img = $("<img>").attr("src", data[i].image).addClass("has-background-warning-light image is-50x50"); 
+        var title = $("<h3>").text(data[i].title).addClass("title has-text-centered is-size-5");
+        var img = $("<img>").attr("src", data[i].image).addClass("has-background-warning-light"); 
         
         var missing = $("<h2>").text("Ingredients needed: ")
 
         for (var j = 0; j < data[i].missedIngredients.length; j ++) {
-              missing.append($("<h2>").text(data[i].missedIngredients[j].name));
+              missing.append($("<h2>").text(data[i].missedIngredients[j].name)).addClass("has-text-centered");
             
         }
-        
+        var used = $("<h2>").text( "Ingredients used from pantry: ")
+
+        for (var k = 0; k < data[i].usedIngredients.length; k ++) {   
+            used.append($("<h2>").text(data[i].usedIngredients[k].name)).addClass("has-text-centered");
+        }
         
         
         cards.append(title, img, missing, used);
