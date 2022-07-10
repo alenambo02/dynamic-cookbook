@@ -100,8 +100,34 @@ button:hover {
    text-align: center;
 }
 
+
+.box {
+    width: 200px;
+    height: 80px;
+    
+} 
+
+h2 {
+    background-color: #397e28;
+    color: black;
+
+}
+
+h3 {
+    font-weight: 200px;
+    color: black;
+}
+
+
+/* #cardscontainer {
+    border-radius: 30;
+    height: 300px;
+    width: 300px;
+} */
+
 .pantry-search{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
