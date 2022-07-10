@@ -26,7 +26,7 @@
 
 
 $(".clickMe").on("click", function () {
-    window.location = "./index.html"
+    window.location = "./index2.html"
 });
 
 var granimInstance = new Granim({
