@@ -23,12 +23,12 @@ $(document).on("click", ".close", function () {
 });
 
 $(document).on("click", ".increase-count-btn", function(){
-    changeCount($(this).siblings(".name").html() ,"+")
+    changeCount($(this).parent().siblings(".name").html() ,"+")
     
 })
 
 $(document).on("click", ".decrease-count-btn", function(){
-    changeCount($(this).siblings(".name").html() ,"-")
+    changeCount($(this).parent().siblings(".name").html() ,"-")
     
 })
 
@@ -64,10 +64,14 @@ function addPantryIngredient(item){ //Add input into pantry list
         //ingredientCounts[item] = 1
         //console.log(ingredientCounts)
         //localStorage.setItem("pantryIngredientsCount", JSON.stringify(ingredientCounts))
-        localStorage.setItem("pantryIngredients", JSON.stringify(ingredientList))
-        //displayPantryIngredietns()
+        saveIngredientList()
+        displayPantryIngredietns()
         console.log(item)
     }
+}
+
+function saveIngredientList(){
+    localStorage.setItem("pantryIngredients", JSON.stringify(ingredientList))
 }
 
 function includesIngredient(ingName){
@@ -83,14 +87,18 @@ function displayPantryIngredietns(){
     var ingCont = $(".ingredients-container")
     ingCont.empty() 
     for(var i = 0; i < ingredientList.length; i++){
-        var ing = $("<div>").addClass("is-flex is-flex-direction-row is-align-content-center")
-        var name = $("<h5>").text(ingredientList[i].name).addClass("name")
-        var incBtn = $("<button>").text("+").addClass("button is-small is-info increase-count-btn")
+        var ing = $("<tr>")
+        var name = $("<th>").text(ingredientList[i].name).addClass("name")
+        var iBtnCont = $("<td>")
+        var incBtn = $("<button>").text("+").addClass("button is-small is-info is-light increase-count-btn")
+        iBtnCont.append(incBtn)
         //console.log(ingredientList[i])
         //console.log(ingredientCounts.ingredientList[i])
-        var ingCount = $("<h5>").text(ingredientList[i].count)
-        var decBtn = $("<button>").text("-").addClass("button is-small is-danger decrease-count-btn")
-        ing.append(name,incBtn,ingCount,decBtn)
+        var ingCount = $("<td>").text(ingredientList[i].count)
+        var dBtnCont = $("<td>")
+        var decBtn = $("<button>").text("-").addClass("button is-small is-danger is-light decrease-count-btn")
+        dBtnCont.append(decBtn)
+        ing.append(name,iBtnCont,ingCount,dBtnCont)
         ingCont.prepend(ing)
     }
 }
@@ -99,9 +107,10 @@ function changeCount(name, direction){
     console.log(name, direction)
     if(direction == "+"){
         ingredientList[findObjectIndex(name)].count += 1
-    } else {
+    } else if(ingredientList[findObjectIndex(name)].count > 1){
         ingredientList[findObjectIndex(name)].count -= 1
     }
+    saveIngredientList()
     displayPantryIngredietns()
     
 }

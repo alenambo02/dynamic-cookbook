@@ -39,14 +39,24 @@
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <div class="pantry-search">
-                    <label for="itemSearch">Enter the ingredients you have here</label>
-                    <input type="text" id="addItemBar" name="itemSearch" value="Apple">
-                    <button type="button" id="addItemBtn">Add item</button>
-                    <div id="generateRecipes"><button>Generate Recipes</button></div>
+                    <label class="mb-2 is-size-3" for="itemSearch">Enter the ingredients you have here</label>
+                    <input type="text" class="input is-link mb-2" id="addItemBar" name="itemSearch" value="Apple">
+                    <button type="button" class="mb-2 button is-size-6 is-small is-fullwidth is-warning" id="addItemBtn">Add item</button>
+                    <div id="generateRecipes" class="mb-1"><button>Generate Recipes</button></div>
                 </div>
                 <div class="pantry-list">
-                    <h5>Current ingredients in pantry</h5>
-                    <ul class="ingredients-container"></ul>
+                    <h5 class="is-size-4">Current ingredients in pantry</h5>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Increase</th>
+                                <th>Amount</th>
+                                <th>Decrease</th>
+                            </tr>
+                        </thead>
+                        <tbody class="ingredients-container"></tbody>
+                    </table>
                 </div>
             </div>
         </div>
