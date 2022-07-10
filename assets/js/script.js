@@ -1,6 +1,8 @@
 var pantryModal = $('#pantryModal')
 var ingredientList = []
 var ingredientCounts = {}
+var shoopingList = []
+var shoopingCounts = {}
 if(localStorage.getItem("pantryIngredients")){ //Check if there is any stored history to grab
     ingredientList = JSON.parse(localStorage.getItem("pantryIngredients"))
 }
@@ -150,6 +152,21 @@ function addShoopingList(item) {
     var list = $("<li>").text(item)
     listCont.prepend(list)
 }
+
+function addShoopingList(item){ //Add input into pantry list
+    if(shoopingList.includes(item)){
+        return
+    } else {
+        shoopingList.push(item)
+        shoopingCounts[item] = 1
+        console.log(shoopingCounts)
+        localStorage.setItem("pantryIngredientsCount", JSON.stringify(shoopingCounts))
+        localStorage.setItem("pantryIngredients", JSON.stringify(shoopingList))
+        displayShoopingIngredietns()
+        console.log(item)
+    }
+}
+
 
 function itemNotAValidInput() {
     var alertCont = $("<div>").addClass("callout small alert")
