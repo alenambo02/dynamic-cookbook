@@ -5,72 +5,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My cookbook</title>
-    
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="./assets/css/reset.css" />
-    <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
-
-
+    
+    <link rel="stylesheet" type="text/css" href="./assets/css/style2.css">
+    <title>Dynamic-Cookbook</title>
 </head>
 
 <body>
-    <header>
-        <button id="cart">Shopping Cart</button>
-        <div id="cartModal" class="shoppingModal">
-            <div class="shoppingModalContent">
-                <span class="close">&times;</span>
-                <div class="shoppingNeeds">
-                    <label for="itemNeeds">Enter items needed:</label>
-                    <input type="text" id="addCartBar" name="cartSearch" value=" ">
-                    <button type="button" id="addCartBtn">Add item</button>
-                </div>
-                <div class="cart-list">
-                    <h5>Current items in shopping cart</h5>
-                    <ul class="shopping-container"></ul>
-                </div>
-            </div>
-        </div>
+    
+    <div class="wrapper">
+        <canvas id="granim"></canvas>
+        <!-- <div class="clickMeBtn"> -->
+        <!-- <a href="./index.html" id="violet-state-cta" class="clickMe">Violet state </a> --> -->
+    </div>
 
-
-        <div>My Cookbook</div>
-        <button id="pantry">What's in my pantry</button>
-        <div id="pantryModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <div class="pantry-search">
-                    <label for="itemSearch">Enter the ingredients you have here</label>
-                    <input type="text" id="addItemBar" name="itemSearch" value="Apple">
-                    <button type="button" id="addItemBtn">Add item</button>
-                    <div id="generateRecipes"><button>Generate Recipes</button></div>
-                </div>
-                <div class="pantry-list">
-                    <h5>Current ingredients in pantry</h5>
-                    <ul class="ingredients-container"></ul>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <main class= "container notification">
-        <figure class="image is-16by9">
-            <img src="https://customsitesmedia.usc.edu/wp-content/uploads/sites/59/2020/11/16002829/Pretty-food-perception-web-824x549.jpg">
-          </figure>
-
-          <div class="hero-body">
-            <p class="title">
-              See your generate recipes below:
-            </p>
-          </div>
-
-        <div id="displaycardshere">
-            <div id="cardscontainer"></div>
-        
-        </div>
-    </main>
- 
-
-
+    <div id="clickbtn">
+        <button href="./index.html" class="clickMe ">Click Me</button>
+    </div>
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

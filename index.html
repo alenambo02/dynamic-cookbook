@@ -10,11 +10,84 @@
 </head>
 
 <body>
+
+    <header>
+        <button id="cart">Shopping Cart</button>
+        <div id="cartModal" class="shoppingModal">
+            <div class="shoppingModalContent">
+                <span class="close">&times;</span>
+                <div class="shoppingNeeds">
+                    <label for="itemNeeds">Enter items needed:</label>
+                    <input type="text" id="addCartBar" name="cartSearch" value=" ">
+                    <button type="button" id="addCartBtn">Add item</button>
+                </div>
+                <div class="cart-list">
+                    <h5>Current items in shopping cart</h5>
+                    <ul class="shopping-container"></ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div>My Cookbook</div>
+        <button id="pantry">What's in my pantry</button>
+        <div id="pantryModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="pantry-search">
+                    <label class="mb-2 is-size-3" for="itemSearch">Enter the ingredients you have here</label>
+                    <input type="text" class="input is-link mb-2" id="addItemBar" name="itemSearch" value="Apple">
+                    <button type="button" class="mb-2 button is-size-6 is-small is-fullwidth is-warning" id="addItemBtn">Add item</button>
+                    <div id="generateRecipes" class="mb-1"><button>Generate Recipes</button></div>
+                </div>
+                <div class="pantry-list  is-flex is-flex-direction-column is-align-content-center">
+                    <h5 class="is-size-4">Current ingredients in pantry</h5>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Delete</th>
+                                <th>Name</th>
+                                <th>Increase</th>
+                                <th>Amount</th>
+                                <th>Decrease</th>
+                            </tr>
+                        </thead>
+                        <tbody class="ingredients-container"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class= "container notification">
+            <figure class="image is-16by9">
+                <img src="https://customsitesmedia.usc.edu/wp-content/uploads/sites/59/2020/11/16002829/Pretty-food-perception-web-824x549.jpg">
+            </figure>
+
+            <div class="hero-body">
+                <p class="title">
+                See your generate recipes below:
+                </p>
+            </div>
+
+        
+            
+            <div id="cardscontainer" class="is-flex is-flex-wrap-wrap"> 
+                    
+            </div>
+                
+  
+            
+    </main>
+ 
+
+
     <div class="wrapper">
         <canvas id="granim"></canvas>
         <!-- <div class="clickMeBtn"> -->
         <!-- <a href="./index.html" id="violet-state-cta" class="clickMe">Violet state </a> --> -->
     </div>
+
 
     <div id="clickbtn">
         <button href="./index2.html" class="clickMe">Click Me</button>
