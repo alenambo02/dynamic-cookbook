@@ -3,15 +3,15 @@ var ingredientList = []
 var ingredientCounts = {}
 var shoopingList = []
 var shoopingCounts = {}
-if(localStorage.getItem("pantryIngredients")){ //Check if there is any stored history to grab
+if (localStorage.getItem("pantryIngredients")) { //Check if there is any stored history to grab
     ingredientList = JSON.parse(localStorage.getItem("pantryIngredients"))
 }
-if(localStorage.getItem("pantryIngredientsCount")){ //Check if there is any stored history to grab
+if (localStorage.getItem("pantryIngredientsCount")) { //Check if there is any stored history to grab
     console.log("reached")
     ingredientCounts = JSON.parse(localStorage.getItem("pantryIngredientsCount"))
 }
 
-console.log(typeof(ingredientCounts), ingredientCounts)
+console.log(typeof (ingredientCounts), ingredientCounts)
 console.log(queryStringifyIngredients())
 
 /* Open and close pantry modal*/
@@ -45,8 +45,8 @@ $(document).on("click", "#addItemBtn", function (event) { //Add ingredient liste
     }
 })
 
-function addPantryIngredient(item){ //Add input into pantry list
-    if(ingredientList.includes(item)){
+function addPantryIngredient(item) { //Add input into pantry list
+    if (ingredientList.includes(item)) {
         return
     } else {
         ingredientList.push(item)
@@ -59,10 +59,10 @@ function addPantryIngredient(item){ //Add input into pantry list
     }
 }
 
-function displayPantryIngredietns(){
+function displayPantryIngredietns() {
     var ingCont = $(".ingredients-container")
-    ingCont.empty() 
-    for(var i = 0; i < ingredientList.length; i++){
+    ingCont.empty()
+    for (var i = 0; i < ingredientList.length; i++) {
         var ing = $("<div>").addClass("is-flex-direction-row")
         var name = $("<h5>").text(ingredientList[i])
         var incBtn = $("<button>").text("+").addClass("increase-count-btn")
@@ -70,7 +70,7 @@ function displayPantryIngredietns(){
         //console.log(ingredientCounts.ingredientList[i])
         var ingCount = $("<h5>").text(ingredientCounts[ingredientList[i]])
         var decBtn = $("<button>").text("-").addClass("decrease-count-btn")
-        ing.append(name,incBtn,ingCount,decBtn)
+        ing.append(name, incBtn, ingCount, decBtn)
         ingCont.prepend(ing)
     }
 }
@@ -93,11 +93,11 @@ function fakeItemAlert() { //Notify user that input is not a real ingredient
     }, 1000)
 }
 
-function queryStringifyIngredients(){
+function queryStringifyIngredients() {
     var rtn = ""
-    for(var i = 0; i < ingredientList.length; i++){
-        if(i==0){
-            rtn+= ingredientList[i]
+    for (var i = 0; i < ingredientList.length; i++) {
+        if (i == 0) {
+            rtn += ingredientList[i]
         } else {
             rtn += ",+" + ingredientList[i]
         }
@@ -153,24 +153,24 @@ function addShoopingList(item) {
     listCont.prepend(list)
 }
 
-function addShoopingList(item){ //Add input into pantry list
-    if(shoopingList.includes(item)){
+function addShoopingList(item) { //Add input into pantry list
+    if (shoopingList.includes(item)) {
         return
     } else {
         shoopingList.push(item)
         shoopingCounts[item] = 1
         console.log(shoopingCounts)
-        localStorage.setItem("pantryIngredientsCount", JSON.stringify(shoopingCounts))
-        localStorage.setItem("pantryIngredients", JSON.stringify(shoopingList))
+        localStorage.setItem("shoppingListCount", JSON.stringify(shoopingCounts))
+        localStorage.setItem("shoopingIngredients", JSON.stringify(shoopingList))
         displayShoopingIngredietns()
         console.log(item)
     }
 }
 
-function displayShoopingIngredietns(){
+function displayShoopingIngredietns() {
     var shpngCont = $(".shopping-container")
-    shpngCont.empty() 
-    for(var i = 0; i < shoopingList.length; i++){
+    shpngCont.empty()
+    for (var i = 0; i < shoopingList.length; i++) {
         var shopng = $("<div>").addClass("is-flex-direction-row")
         var name = $("<h5>").text(shoopingList[i])
         var incBtn = $("<button>").text("+").addClass("increase-count-btn")
@@ -178,8 +178,8 @@ function displayShoopingIngredietns(){
         //console.log(ingredientCounts.ingredientList[i])
         var ingCount = $("<h5>").text(shoopingList[shoopingList[i]])
         var decBtn = $("<button>").text("-").addClass("decrease-count-btn")
-        shopng.append(name,incBtn,ingCount,decBtn)
-        shpngCont.prepend(ing)
+        shopng.append(name, incBtn, ingCount, decBtn)
+        shpngCont.prepend(shopng)
     }
 }
 
@@ -217,23 +217,23 @@ $(document).on("click", "#generateRecipes", function (event) {
 
     var makeRecipes = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=945c0458a68b49e7a3fb5666d1cdd990&ingredients=" + ingredientParse + "&number=9&ranking=2"
     $.ajax({
-        url:makeRecipes,
+        url: makeRecipes,
         method: "GET"
 
     })
-        .then(function(response) {
-        
+        .then(function (response) {
+
             console.log(response)
-            
+
             // if (!response.length) {
             //     console.log('No results found!');
 
             // }
-        
 
-    
-        generateRecipeCards(response)
-  
+
+
+            generateRecipeCards(response)
+
         })
 
 });
@@ -242,21 +242,21 @@ $(document).on("click", "#generateRecipes", function (event) {
 
 var cardContanier = $("#cardscontainer")
 
-    
-    
+
+
 function generateRecipeCards(data) {
-   
+
 
     for (var i = 0; i < data.length; i++) {
-       
-    var cards = $("<div>").addClass("box column is-one-third");
-    cards.css('background-color', '#00FFAC');
-    var title = $("<h3>").text(data[i].title).addClass("box has-text-black has-text-centered");
-    var img = $("<img>").attr("src", data[i].image).addClass("has-background-warning-light image is-50x50"); 
-     
-    
-    cards.append(title, img);
-    cardContanier.append(cards);
+
+        var cards = $("<div>").addClass("box column is-one-third");
+        cards.css('background-color', '#00FFAC');
+        var title = $("<h3>").text(data[i].title).addClass("box has-text-black has-text-centered");
+        var img = $("<img>").attr("src", data[i].image).addClass("has-background-warning-light image is-50x50");
+
+
+        cards.append(title, img);
+        cardContanier.append(cards);
 
     }
 }
