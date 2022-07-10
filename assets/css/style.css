@@ -98,17 +98,12 @@ button:hover {
    text-align: center;
 }
 
-/* #cardscontainer {
-    border-radius: 30;
-} */
 
-/* 
-#displaycardshere {
-    border-radius: 50px;
-} */
+
+
 
 h2 {
-    background-color: rgb(240, 210, 38);
+    background-color: #397e28;
     color: black;
 
 }
@@ -119,3 +114,8 @@ h3 {
 }
 
 
+/* #cardscontainer {
+    border-radius: 30;
+    height: 300px;
+    width: 300px;
+} */

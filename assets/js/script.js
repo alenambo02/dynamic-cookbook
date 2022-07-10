@@ -129,7 +129,7 @@ $(document).on("click", ".close", function () {
 $(document).on("click", "#addCartBtn", function (event) {
     var cartVal = $(this).siblings("input").val()
     if (cartVal != "") {
-        var cartCheckUrl = "https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=c8ae3021308e4c6fa278becfa56df80b&query=" + cartVal
+        var cartCheckUrl = "https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=597241d5914540eb9a064d99f044c672&query=" + cartVal
         $.ajax({
             url: cartCheckUrl,
             method: "GET"
@@ -180,10 +180,10 @@ var displayCards = $('#displaycardshere')
 
 //generate recipes btn
 $(document).on("click", "#generateRecipes", function (event) {
-    displayCards.css("display", "block")
+    
     var ingredientParse = queryStringifyIngredients()
 
-    var makeRecipes = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=945c0458a68b49e7a3fb5666d1cdd990&ingredients=" + ingredientParse + "&number=9&ranking=2"
+    var makeRecipes = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=c8ae3021308e4c6fa278becfa56df80b&ingredients=" + ingredientParse + "&number=9&ranking=2"
     $.ajax({
         url:makeRecipes,
         method: "GET"
@@ -193,13 +193,7 @@ $(document).on("click", "#generateRecipes", function (event) {
         
             console.log(response)
             
-            // if (!response.length) {
-            //     console.log('No results found!');
-
-            // }
-        
-
-    
+           
         generateRecipeCards(response)
   
         })
@@ -217,11 +211,11 @@ function generateRecipeCards(data) {
 
     for (var i = 0; i < data.length; i++) {
         
-        var cards = $("<div>").addClass("card card-content-padding-is-3.0rem");
-        cards.css('background-color', '#00FFAC');
-        var title = $("<h3>").text(data[i].title).addClass("title has-text-centered is-size-5");
-        var img = $("<img>").attr("src", data[i].image).addClass("has-background-warning-light"); 
-        
+        var cards = $("<div>").addClass("card card-shadow-is-1em p-5");
+        cards.css('background-color', '#aae39c');
+        var title = $("<h3>").text(data[i].title).addClass(" has-text-centered");
+        var img = $("<img>").attr("src", data[i].image).addClass("image is-fullwidth card-image is-clickable"); 
+        img.attr("data-id", data[i].id)
         var missing = $("<h2>").text("Ingredients needed: ")
 
         for (var j = 0; j < data[i].missedIngredients.length; j ++) {
@@ -231,14 +225,48 @@ function generateRecipeCards(data) {
         var used = $("<h2>").text( "Ingredients used from pantry: ")
 
         for (var k = 0; k < data[i].usedIngredients.length; k ++) {   
-            used.append($("<h2>").text(data[i].usedIngredients[k].name)).addClass("has-text-centered");
+            used.append($("<h2>").text(data[i].usedIngredients[k].name)).addClass(" has-text-centered");
         }
+        
         
         
         cards.append(title, img, missing, used);
         cardContanier.append(cards);
 
     }
+}
+
+
+// working on api call for link to websites below 
+
+$(document).on("click", ".card-image", function (event) {
+    var id = $(this).attr("data-id")
+    getRecipeUrl(id)
+})
+
+function getRecipeUrl(id) {
+
+var getUrlLink = "https://api.spoonacular.com/recipes/" + id + "/information?apiKey=c8ae3021308e4c6fa278becfa56df80b"
+
+$.ajax({
+    url: getUrlLink,
+    method: "GET"
+
+})
+    .then(function(response) {
+       
+
+        window.open(response.sourceUrl)
+        
+        console.log(response)
+        
+        // if (!response.length) {
+        //     console.log('No results found!');
+
+    
+
+    })
+    
 }
 
 
