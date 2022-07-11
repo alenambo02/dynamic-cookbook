@@ -255,23 +255,25 @@ function addShoppingList(item) { //Add input into pantry list
     if (includesItm(item)) {
         return
     } else {
+        console.log("reached")
         var itmObj = {}
         itmObj["name"] = item
         itmObj["count"] = 1
         shoppingList.push(itmObj)
         saveShoppingList()
-        displayShoppingIngredietns()
+        displayShoppingIngredients()
         console.log(item)
     }
 }
 
 function saveShoppingList(){
-    localStorage.setItem("shoppingIngredients", JSON.stringify(ingredientList))
+    localStorage.setItem("shoppingIngredients", JSON.stringify(shoppingList))
 }
 
 function includesItm(itmName){
     for(var i = 0; i < shoppingList.length; i++){
         if(shoppingList[i].name == itmName){
+            console.log(shoppingList[i].name, itmName)
             return true
         }
     }
@@ -282,6 +284,7 @@ function displayShoppingIngredients() {
     var sCont = $(".shopping-container")
     sCont.empty()
     for (var i = 0; i < shoppingList.length; i++) {
+        console.log("reached display", shoppingList[i].name)
         var ing = $("<tr>")
         var delBtnCont = $("<td>")
         var deleteBtn = $("<button>").text("del").addClass("button is-small is-danger delete-shpng-btn")
@@ -295,7 +298,7 @@ function displayShoppingIngredients() {
         var decBtn = $("<button>").text("-").addClass("button is-small is-danger is-light decrease-sItm-btn")
         dBtnCont.append(decBtn)
         ing.append(delBtnCont, name, iBtnCont, ingCount, dBtnCont)
-        $("shopping-container").prepend(ing)
+        sCont.prepend(ing)
     }
 }
 
