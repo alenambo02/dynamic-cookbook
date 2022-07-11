@@ -49,15 +49,16 @@ $(document).on("click", ".delete-ing-btn", function () {
 $(document).on("click", "#addItemBtn", function (event) { //Add ingredient listener
     var itemVal = $(this).siblings("input").val()
     if (itemVal != "") { //Simple validation for if any input at all
-        var itemCheckUrl = "https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=597241d5914540eb9a064d99f044c672&query=" + itemVal
+        var itemCheckUrl = "https://api.edamam.com/auto-complete?app_id=fd3763f8&app_key=4577463150cadf088b2a86813ab799da&q=" + itemVal + "&limit=5"
         $.ajax({ //Fetch validation. Call api to see if an ingredient exsists with the name of the input
             url: itemCheckUrl,
             method: "GET"
         })
             .then(function (response) {
+                console.log(response)
                 if (response.length > 0) { //Real items will return an array with at least 1 element
                     //console.log("real ingredient")
-                    addPantryIngredient(response[0].name.charAt(0).toUpperCase() + response[0].name.slice(1))
+                    addPantryIngredient(response[0].charAt(0).toUpperCase() + response[0].slice(1))
                 } else { //Fake items will return an empty array
                     fakeItemAlert() //Notify user that it is a fake ingredient
                 }
@@ -66,8 +67,10 @@ $(document).on("click", "#addItemBtn", function (event) { //Add ingredient liste
 })
 
 
-function addPantryIngredient(item) { //Add input into pantry list
-    if (includesIngredient(item)) {
+
+
+function addPantryIngredient(item){ //Add input into pantry list
+    if(includesIngredient(item)){
         return
     } else {
         var ingObj = {}
@@ -193,10 +196,11 @@ function findObjectIndexShoopingCart(name) {
 
 function fakeItemAlert() { //Notify user that input is not a real ingredient
     /*Add alert elements to modal*/
-    var alertCont = $("<div>").addClass("callout small alert")
+    var alertCont = $("<div>").addClass("alert")
     var alrMsg = $("<h5>").text("Please input a real ingredient")
     alertCont.append(alrMsg)
-    pantryModal.append(alertCont)
+    
+    $(".modal-content").append(alertCont)
 
     var secondsLeft = 5 //Run the alert for 5 seconds
     var timerInterval = setInterval(function () {
@@ -398,6 +402,10 @@ var displayCards = $('#displaycardshere')
 //generate recipes btn
 $(document).on("click", "#generateRecipes", function (event) {
 
+
+
+    cardContanier.empty()
+
     var ingredientParse = queryStringifyIngredients()
 
     var makeRecipes = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=c8ae3021308e4c6fa278becfa56df80b&ingredients=" + ingredientParse + "&number=9&ranking=2"
@@ -433,8 +441,10 @@ function generateRecipeCards(data) {
 
         var cards = $("<div>").addClass("card card-shadow-is-1em p-5");
         cards.css('background-color', '#aae39c');
-        var title = $("<h3>").text(data[i].title).addClass("box has-text-centered");
-        var img = $("<img>").attr("src", data[i].image).addClass("image is-fullwidth card-image is-clickable");
+
+        var title = $("<h3>").text(data[i].title).addClass("box has-text-centered has-text-weight-bold");
+        var img = $("<img>").attr("src", data[i].image).addClass("image is-fullwidth mb-3 card-image is-clickable"); 
+
         img.attr("data-id", data[i].id)
         var missing = $("<h2>").text("Ingredients needed: ")
 
@@ -476,20 +486,13 @@ function getRecipeUrl(id) {
         .then(function (response) {
 
 
-            window.open(response.sourceUrl)
-
-            console.log(response)
-
-            // if (!response.length) {
-            //     console.log('No results found!');
-
-
-
-
-
-
-
-        })
+        window.open(response.sourceUrl)
+        
+        console.log(response)
+        
+        // if (!response.length) {
+        //     console.log('No results found!');
+   
 
 }
 

@@ -100,30 +100,39 @@ button:hover {
     text-align: center;
 }
 
-
+.pantry-search{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* stying done for cards before to make additional adjustments from bulma styling*/
 .box {
     width: 200px;
-    height: 80px;
 
+    height: 100px;
+    margin-left: 30px;
+    background-color: #e9c3b1;
 }
 
 h2 {
-    background-color: #397e28;
-    color: black;
-
+    background-color: #dfda93;
+    color: rgb(0, 0, 0);
+    padding: 2px;
+    
 }
 
-h3 {
-    font-weight: 200px;
-    color: black;
+/* centers entire container */
+#cardscontainer{
+    justify-content: center;
 }
 
-
-/* #cardscontainer {
-    border-radius: 30;
-    height: 300px;
+/* forces cards to be certain size*/
+.card {
+    margin-inline: 10px ;
+    margin-block: 5px;
+    height: 500px;
     width: 300px;
-} */
+
 
 .pantry-search {
     display: flex;
@@ -134,4 +143,16 @@ h3 {
 
 .cookbook-title {
     margin-bottom: 0 !important;
+
+}
+
+.alert{
+    background-color: tomato;
+    color: white;
+    display: flex;
+    justify-content: center;
+    font-size: large;
+    padding: 10px;
+    border-left: 5%;
+    border-right: 5%;
 }
