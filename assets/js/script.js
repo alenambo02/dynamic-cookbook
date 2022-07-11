@@ -153,7 +153,7 @@ function findObjectIndex(name){
 
 function fakeItemAlert() { //Notify user that input is not a real ingredient
     /*Add alert elements to modal*/
-    var alertCont = $("<div>").addClass("alert")
+    var alertCont = $("<div>").addClass("fakeItem")
     var alrMsg = $("<h5>").text("Please input a real ingredient")
     alertCont.append(alrMsg)
     

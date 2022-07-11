@@ -132,7 +132,7 @@ h2 {
     margin-block: 5px;
     height: 500px;
     width: 300px;
-
+}
 
 .pantry-search {
     display: flex;
@@ -146,7 +146,7 @@ h2 {
 
 }
 
-.alert{
+.fakeItem{
     background-color: tomato;
     color: white;
     display: flex;
