@@ -136,6 +136,20 @@ function changeCount(name, direction) {
 
 }
 
+
+//increase&decrease for shopping cart
+function changeCount(name, direction) {
+    console.log(name, direction)
+    if (direction == "+") {
+        shoopingList[findObjectIndex(name)].count += 1
+    } else if (shoopingList[findObjectIndex(name)].count > 1) {
+        shoopingList[findObjectIndex(name)].count -= 1
+    }
+    saveShoopingList()
+    displayShoopingIngredietns()
+}
+
+//delete button for pantry
 function deleteItemInPantry(name) {
     var i = findObjectIndex(name)
     if (i > -1) {
@@ -148,6 +162,28 @@ function deleteItemInPantry(name) {
 function findObjectIndex(name) {
     for (var i = 0; i < ingredientList.length; i++) {
         if (ingredientList[i].name == name) {
+            console.log("Found " + name, " at index" + i)
+            return i
+        }
+    }
+    return -1
+}
+
+
+//delete button for shoppingcart
+function deleteItemInShoopingCart(name) {
+    debugger
+    var i = findObjectIndexShoopingCart(name)
+    if (i > -1) {
+        shoopingList.splice(i, 1)
+    }
+    saveShoopingList()
+    displayShoopingIngredietns()
+}
+
+function findObjectIndexShoopingCart(name) {
+    for (var i = 0; i < shoopingList.length; i++) {
+        if (shoopingList[i] == name) {
             console.log("Found " + name, " at index" + i)
             return i
         }
@@ -210,7 +246,6 @@ $(document).on("click", ".close", function () {
 
 $(document).on("click", ".increase-count-btn", function () {
     changeCount($(this).parent().siblings(".name").html(), "+")
-
 })
 
 $(document).on("click", ".decrease-count-btn", function () {
@@ -220,6 +255,12 @@ $(document).on("click", ".decrease-count-btn", function () {
 $(document).on("click", ".delete-ing-btn", function () {
     deleteItemInPantry($(this).parent().siblings(".name").html())
 })
+
+$(document).on("click", ".delete-shpng-btn", function () {
+    debugger
+    deleteItemInShoopingCart($(this).parent().siblings(".name").html())
+})
+
 
 
 $(document).on("click", "#addCartBtn", function (event) {
@@ -267,16 +308,33 @@ function displayShoopingIngredietns() {
 
     for (var i = 0; i < shoopingList.length; i++) {
         // debugger
-        var shopng = $("<div>").addClass("is-flex-direction-row")
-        var name = $("<h5>").text(shoopingList[i])
-        var incBtn = $("<button>").text("+").addClass("increase-count-btn").attr('id', 'addBtn')
+        // var shopng = $("<div>").addClass("is-flex-direction-row")
+        // var name = $("<h5>").text(shoopingList[i])
+        // var incBtn = $("<button>").text("+").addClass("increase-count-btn").attr('id', 'addBtn')
 
+        // //console.log(ingredientList[i])
+        // //console.log(ingredientCounts.ingredientList[i])
+        // var ingCount = $("<h5>").text(shoopingCounts[shoopingList[i]])
+        // var decBtn = $("<button>").text("-").addClass("decrease-count-btn")
+        // shopng.append(name, incBtn, ingCount, decBtn)
+        // shpngCont.prepend(shopng)
+
+        var ing = $("<tr>")
+        var delBtnCont = $("<td>")
+        var deleteBtn = $("<button>").text("del").addClass("button is-small is-danger delete-shpng-btn")
+        delBtnCont.append(deleteBtn)
+        var name = $("<th>").text(shoopingList[i]).addClass("name")
+        var iBtnCont = $("<td>")
+        var incBtn = $("<button>").text("+").addClass("button is-small is-info is-light increase-count-btn")
+        iBtnCont.append(incBtn)
         //console.log(ingredientList[i])
         //console.log(ingredientCounts.ingredientList[i])
-        var ingCount = $("<h5>").text(shoopingCounts[shoopingList[i]])
-        var decBtn = $("<button>").text("-").addClass("decrease-count-btn")
-        shopng.append(name, incBtn, ingCount, decBtn)
-        shpngCont.prepend(shopng)
+        var ingCount = $("<td>").text(shoopingCounts[shoopingList[i]])
+        var dBtnCont = $("<td>")
+        var decBtn = $("<button>").text("-").addClass("button is-small is-danger is-light decrease-count-btn")
+        dBtnCont.append(decBtn)
+        ing.append(delBtnCont, name, iBtnCont, ingCount, dBtnCont)
+        shpngCont.prepend(ing)
     }
 }
 
