@@ -38,21 +38,23 @@ $(document).on("click", ".delete-ing-btn", function(){
 $(document).on("click", "#addItemBtn", function (event) { //Add ingredient listener
     var itemVal = $(this).siblings("input").val()
     if (itemVal != "") { //Simple validation for if any input at all
-        var itemCheckUrl = "https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=597241d5914540eb9a064d99f044c672&query=" + itemVal
+        var itemCheckUrl = "https://api.edamam.com/auto-complete?app_id=fd3763f8&app_key=4577463150cadf088b2a86813ab799da&q=" + itemVal + "&limit=5"
         $.ajax({ //Fetch validation. Call api to see if an ingredient exsists with the name of the input
             url: itemCheckUrl,
             method: "GET"
         })
             .then(function (response) {
+                console.log(response)
                 if (response.length > 0) { //Real items will return an array with at least 1 element
                     //console.log("real ingredient")
-                    addPantryIngredient(response[0].name.charAt(0).toUpperCase() + response[0].name.slice(1))
+                    addPantryIngredient(response[0].charAt(0).toUpperCase() + response[0].slice(1))
                 } else { //Fake items will return an empty array
                     fakeItemAlert() //Notify user that it is a fake ingredient
                 }
             })
     }
 })
+
 
 
 function addPantryIngredient(item){ //Add input into pantry list
