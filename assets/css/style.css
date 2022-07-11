@@ -97,6 +97,7 @@ button:hover {
 }
 
 .title {
+    margin-top: 20px;
     text-align: center;
 }
 
@@ -142,7 +143,7 @@ h2 {
 
 
 .cookbook-title {
-    margin-bottom: 0 !important;
+   font-size: 1.5rem;
 
 }
 
