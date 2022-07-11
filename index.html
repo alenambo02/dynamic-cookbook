@@ -15,7 +15,7 @@
 <body>
 
 
-    
+
     <header>
         <button id="cart">Shopping Cart</button>
         <div id="cartModal" class="shoppingModal">
@@ -24,11 +24,27 @@
                 <div class="shoppingNeeds">
                     <label class="mb-2 is-size-3" for="itemNeeds">Enter items needed:</label>
                     <input type="text" class="input is-link mb-2" id="addCartBar" name="cartSearch" value=" ">
-                    <button type="button" class="mb-2 button is-size-6 is-small is-fullwidth is-warning" id="addCartBtn">Add item</button>
+                    <button type="button" class="mb-2 button is-size-6 is-small is-fullwidth is-warning"
+                        id="addCartBtn">Add item</button>
                 </div>
-                <div class="cart-list">
-                    <h5>Current items in shopping cart</h5>
-                    <ul class="shopping-container"></ul>
+                <div class="cart-list is-flex is-flex-direction-column is-align-content-center">
+                    <h5 class="is-size-4">Current items in shopping cart</h5>
+                    <table class="table">
+
+                        <thead>
+
+
+                            <tr>
+                                <th>Delete</th>
+                                <th>Name</th>
+                                <th>Increase</th>
+                                <th>Amount</th>
+                                <th>Decrease</th>
+
+                            </tr>
+                        </thead>
+                    </table>
+
                 </div>
             </div>
         </div>

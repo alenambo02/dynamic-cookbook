@@ -1,4 +1,5 @@
 var pantryModal = $('#pantryModal')
+var cartModal = $('#cartModal')
 var ingredientList = []
 
 if (localStorage.getItem("pantryIngredients")) { //Check if there is any stored history to grab
@@ -19,6 +20,12 @@ if (localStorage.getItem("shoopingIngredients")) { //Check if there is any store
 $(document).on("click", "#pantry", function (event) {
     pantryModal.css("display", "block")
     displayPantryIngredietns()
+});
+
+/* Open and close pantry modal*/
+$(document).on("click", "#cart", function (event) {
+    cartModal.css("display", "block")
+    displayShoopingIngredietns()
 });
 
 $(document).on("click", ".close", function () {
@@ -201,6 +208,20 @@ $(document).on("click", ".close", function () {
     shoppingModal.css("display", "none")
 });
 
+$(document).on("click", ".increase-count-btn", function () {
+    changeCount($(this).parent().siblings(".name").html(), "+")
+
+})
+
+$(document).on("click", ".decrease-count-btn", function () {
+    changeCount($(this).parent().siblings(".name").html(), "-")
+})
+
+$(document).on("click", ".delete-ing-btn", function () {
+    deleteItemInPantry($(this).parent().siblings(".name").html())
+})
+
+
 $(document).on("click", "#addCartBtn", function (event) {
     var cartVal = $(this).siblings("input").val()
     if (cartVal != "") {
@@ -259,27 +280,27 @@ function displayShoopingIngredietns() {
     }
 }
 
-$(document).on("click", "#cart", function (event) {
-    // cartModal.css("display", "block")
-    displayShoopingIngredietns()
-});
+// $(document).on("click", "#cart", function (event) {
+//     // cartModal.css("display", "block")
+//     displayShoopingIngredietns()
+// });
 
-$(document).on("click", ".close", function () {
-    // cartModal.css("display", "none")
-});
+// $(document).on("click", ".close", function () {
+//     // cartModal.css("display", "none")
+// });
 
-$(document).on("click", ".increase-count-btn", function () {
-    changeCount($(this).parent().siblings(".name").html(), "+")
+// $(document).on("click", ".increase-count-btn", function () {
+//     changeCount($(this).parent().siblings(".name").html(), "+")
 
-})
+// })
 
-$(document).on("click", ".decrease-count-btn", function () {
-    changeCount($(this).parent().siblings(".name").html(), "-")
-})
+// $(document).on("click", ".decrease-count-btn", function () {
+//     changeCount($(this).parent().siblings(".name").html(), "-")
+// })
 
-$(document).on("click", ".delete-ing-btn", function () {
-    deleteItemInPantry($(this).parent().siblings(".name").html())
-})
+// $(document).on("click", ".delete-ing-btn", function () {
+//     deleteItemInPantry($(this).parent().siblings(".name").html())
+// })
 
 $(document).on("click", "#addBtn", function (event) {
     //     console.log("imhere")
