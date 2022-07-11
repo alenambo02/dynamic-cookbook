@@ -296,30 +296,26 @@ function displayShoopingIngredietns() {
     }
 }
 
-// $(document).on("click", "#cart", function (event) {
-//     // cartModal.css("display", "block")
-//     displayShoopingIngredietns()
-// });
-
-// $(document).on("click", ".close", function () {
-//     // cartModal.css("display", "none")
-// });
-
-// $(document).on("click", ".increase-count-btn", function () {
-//     changeCount($(this).parent().siblings(".name").html(), "+")
-
-// })
-
-// $(document).on("click", ".decrease-count-btn", function () {
-//     changeCount($(this).parent().siblings(".name").html(), "-")
-// })
-
-// $(document).on("click", ".delete-ing-btn", function () {
-//     deleteItemInPantry($(this).parent().siblings(".name").html())
-// })
+function changeSCount(name, direction){
+    if(direction == "+"){
+        shoppingList[findItmObjectIndex(name)].count += 1
+    } else if(shoppingList[findItmObjectIndex(name)].count > 1){
+        shoppingList[findItmObjectIndex(name)].count -= 1
+    }
+    saveIngredientList()
+    displayPantryIngredietns()
+}
 
 
-
+function findItmObjectIndex(name){
+    for(var i = 0; i < shoppingList.length; i++){
+        if(shoppingList[i].name == name){
+            console.log("Found " + name, " at index" + i)
+            return i
+        }
+    }
+    return -1
+}
 
 
 function itemNotAValidInput() {
