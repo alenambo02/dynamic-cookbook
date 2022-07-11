@@ -131,3 +131,13 @@ h3 {
     align-items: center;
 }
 
+.alert{
+    background-color: tomato;
+    color: white;
+    display: flex;
+    justify-content: center;
+    font-size: large;
+    padding: 10px;
+    border-left: 5%;
+    border-right: 5%;
+}

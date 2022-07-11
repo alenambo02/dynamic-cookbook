@@ -55,8 +55,6 @@ $(document).on("click", "#addItemBtn", function (event) { //Add ingredient liste
     }
 })
 
-
-
 function addPantryIngredient(item){ //Add input into pantry list
     if(includesIngredient(item)){
         return
@@ -144,10 +142,11 @@ function findObjectIndex(name){
 
 function fakeItemAlert() { //Notify user that input is not a real ingredient
     /*Add alert elements to modal*/
-    var alertCont = $("<div>").addClass("callout small alert")
+    var alertCont = $("<div>").addClass("alert")
     var alrMsg = $("<h5>").text("Please input a real ingredient")
     alertCont.append(alrMsg)
-    pantryModal.append(alertCont)
+    
+    $(".modal-content").append(alertCont)
 
     var secondsLeft = 5 //Run the alert for 5 seconds
     var timerInterval = setInterval(function () {
