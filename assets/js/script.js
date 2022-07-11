@@ -211,7 +211,7 @@ $(document).on("click", ".decrease-sItm-btn", function () {
     changeSCount($(this).parent().siblings(".name").html(), "-")
 })
 
-$(document).on("click", ".delete-ing-btn", function () {
+$(document).on("click", ".delete-shpng-btn", function () {
     deleteItemInShopping($(this).parent().siblings(".name").html())
 })
 
@@ -314,6 +314,8 @@ function changeSCount(name, direction){
 
 function deleteItemInShopping(name){
     var i = findItmObjectIndex(name)
+    console.log(name)
+    console.log(i)
     if(i > -1){
         shoppingList.splice(i,1)
     }
