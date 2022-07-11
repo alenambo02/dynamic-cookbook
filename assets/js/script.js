@@ -138,16 +138,16 @@ function changeCount(name, direction) {
 
 
 //increase&decrease for shopping cart
-function changeCount(name, direction) {
-    console.log(name, direction)
-    if (direction == "+") {
-        shoopingList[findObjectIndex(name)].count += 1
-    } else if (shoopingList[findObjectIndex(name)].count > 1) {
-        shoopingList[findObjectIndex(name)].count -= 1
-    }
-    saveShoopingList()
-    displayShoopingIngredietns()
-}
+// function changeCount(name, direction) {
+//     console.log(name, direction)
+//     if (direction == "+") {
+//         shoopingList[findObjectIndex(name)].count += 1
+//     } else if (shoopingList[findObjectIndex(name)].count > 1) {
+//         shoopingList[findObjectIndex(name)].count -= 1
+//     }
+//     saveShoopingList()
+//     displayShoopingIngredietns()
+// }
 
 //delete button for pantry
 function deleteItemInPantry(name) {
