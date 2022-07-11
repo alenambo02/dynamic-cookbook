@@ -69,8 +69,8 @@ $(document).on("click", "#addItemBtn", function (event) { //Add ingredient liste
 
 
 
-function addPantryIngredient(item){ //Add input into pantry list
-    if(includesIngredient(item)){
+function addPantryIngredient(item) { //Add input into pantry list
+    if (includesIngredient(item)) {
         return
     } else {
         var ingObj = {}
@@ -199,7 +199,7 @@ function fakeItemAlert() { //Notify user that input is not a real ingredient
     var alertCont = $("<div>").addClass("alert")
     var alrMsg = $("<h5>").text("Please input a real ingredient")
     alertCont.append(alrMsg)
-    
+
     $(".modal-content").append(alertCont)
 
     var secondsLeft = 5 //Run the alert for 5 seconds
@@ -443,7 +443,7 @@ function generateRecipeCards(data) {
         cards.css('background-color', '#aae39c');
 
         var title = $("<h3>").text(data[i].title).addClass("box has-text-centered has-text-weight-bold");
-        var img = $("<img>").attr("src", data[i].image).addClass("image is-fullwidth mb-3 card-image is-clickable"); 
+        var img = $("<img>").attr("src", data[i].image).addClass("image is-fullwidth mb-3 card-image is-clickable");
 
         img.attr("data-id", data[i].id)
         var missing = $("<h2>").text("Ingredients needed: ")
@@ -486,15 +486,15 @@ function getRecipeUrl(id) {
         .then(function (response) {
 
 
-        window.open(response.sourceUrl)
-        
-        console.log(response)
-        
-        // if (!response.length) {
-        //     console.log('No results found!');
-   
+            window.open(response.sourceUrl)
 
-}
+            console.log(response)
+
+            // if (!response.length) {
+            //     console.log('No results found!');
+
+        })
+};
 
 
 
