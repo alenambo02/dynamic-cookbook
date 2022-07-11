@@ -32,16 +32,16 @@ $(document).on("click", ".close", function () {
     pantryModal.css("display", "none")
 });
 
-$(document).on("click", ".increase-count-btn", function () {
-    changeCount($(this).parent().siblings(".name").html(), "+")
-
+$(document).on("click", ".increase-count-btn", function(){
+    changeCount($(this).parent().siblings(".name").html() ,"+")
+    
 })
 
-$(document).on("click", ".decrease-count-btn", function () {
-    changeCount($(this).parent().siblings(".name").html(), "-")
+$(document).on("click", ".decrease-count-btn", function(){
+    changeCount($(this).parent().siblings(".name").html() ,"-")
 })
 
-$(document).on("click", ".delete-ing-btn", function () {
+$(document).on("click", ".delete-ing-btn", function(){
     deleteItemInPantry($(this).parent().siblings(".name").html())
 })
 /*Get List of ingredients*/
@@ -66,9 +66,6 @@ $(document).on("click", "#addItemBtn", function (event) { //Add ingredient liste
     }
 })
 
-
-
-
 function addPantryIngredient(item){ //Add input into pantry list
     if(includesIngredient(item)){
         return
@@ -87,27 +84,23 @@ function addPantryIngredient(item){ //Add input into pantry list
 }
 
 
-function saveIngredientList() {
+function saveIngredientList(){
     localStorage.setItem("pantryIngredients", JSON.stringify(ingredientList))
 }
 
-function saveShoopingList() {
-    localStorage.setItem("shoopingIngredients", JSON.stringify(shoopingList))
-}
-
-function includesIngredient(ingName) {
-    for (var i = 0; i < ingredientList.length; i++) {
-        if (ingredientList[i].name == ingName) {
+function includesIngredient(ingName){
+    for(var i = 0; i < ingredientList.length; i++){
+        if(ingredientList[i].name == ingName){
             return true
         }
     }
     return false
 }
 
-function displayPantryIngredietns() {
+function displayPantryIngredietns(){
     var ingCont = $(".ingredients-container")
-    ingCont.empty()
-    for (var i = 0; i < ingredientList.length; i++) {
+    ingCont.empty() 
+    for(var i = 0; i < ingredientList.length; i++){
         var ing = $("<tr>")
         var delBtnCont = $("<td>")
         var deleteBtn = $("<button>").text("del").addClass("button is-small is-danger delete-ing-btn")
@@ -122,71 +115,35 @@ function displayPantryIngredietns() {
         var dBtnCont = $("<td>")
         var decBtn = $("<button>").text("-").addClass("button is-small is-danger is-light decrease-count-btn")
         dBtnCont.append(decBtn)
-        ing.append(delBtnCont, name, iBtnCont, ingCount, dBtnCont)
+        ing.append(delBtnCont,name,iBtnCont,ingCount,dBtnCont)
         ingCont.prepend(ing)
     }
 }
 
-function changeCount(name, direction) {
+function changeCount(name, direction){
     console.log(name, direction)
-    if (direction == "+") {
+    if(direction == "+"){
         ingredientList[findObjectIndex(name)].count += 1
-    } else if (ingredientList[findObjectIndex(name)].count > 1) {
+    } else if(ingredientList[findObjectIndex(name)].count > 1){
         ingredientList[findObjectIndex(name)].count -= 1
     }
     saveIngredientList()
     displayPantryIngredietns()
-
+    
 }
 
-
-//increase&decrease for shopping cart
-// function changeCount(name, direction) {
-//     console.log(name, direction)
-//     if (direction == "+") {
-//         shoopingList[findObjectIndex(name)].count += 1
-//     } else if (shoopingList[findObjectIndex(name)].count > 1) {
-//         shoopingList[findObjectIndex(name)].count -= 1
-//     }
-//     saveShoopingList()
-//     displayShoopingIngredietns()
-// }
-
-//delete button for pantry
-function deleteItemInPantry(name) {
+function deleteItemInPantry(name){
     var i = findObjectIndex(name)
-    if (i > -1) {
-        ingredientList.splice(i, 1)
+    if(i > -1){
+        ingredientList.splice(i,1)
     }
     saveIngredientList()
     displayPantryIngredietns()
 }
 
-function findObjectIndex(name) {
-    for (var i = 0; i < ingredientList.length; i++) {
-        if (ingredientList[i].name == name) {
-            console.log("Found " + name, " at index" + i)
-            return i
-        }
-    }
-    return -1
-}
-
-
-//delete button for shoppingcart
-function deleteItemInShoopingCart(name) {
-    debugger
-    var i = findObjectIndexShoopingCart(name)
-    if (i > -1) {
-        shoopingList.splice(i, 1)
-    }
-    saveShoopingList()
-    displayShoopingIngredietns()
-}
-
-function findObjectIndexShoopingCart(name) {
-    for (var i = 0; i < shoopingList.length; i++) {
-        if (shoopingList[i] == name) {
+function findObjectIndex(name){
+    for(var i = 0; i < ingredientList.length; i++){
+        if(ingredientList[i].name == name){
             console.log("Found " + name, " at index" + i)
             return i
         }
@@ -215,9 +172,9 @@ function fakeItemAlert() { //Notify user that input is not a real ingredient
 
 function queryStringifyIngredients() {
     var rtn = ""
-    for (var i = 0; i < ingredientList.length; i++) {
-        if (i == 0) {
-            rtn += ingredientList[i].name
+    for(var i = 0; i < ingredientList.length; i++){
+        if(i==0){
+            rtn+= ingredientList[i].name
         } else {
             rtn += ",+" + ingredientList[i].name
         }
@@ -248,6 +205,7 @@ $(document).on("click", ".close", function () {
     shoppingModal.css("display", "none")
 });
 
+/*
 $(document).on("click", ".increase-count-btn", function () {
     changeCount($(this).parent().siblings(".name").html(), "+")
 })
@@ -264,7 +222,7 @@ $(document).on("click", ".delete-shpng-btn", function () {
     debugger
     deleteItemInShoopingCart($(this).parent().siblings(".name").html())
 })
-
+*/
 
 
 $(document).on("click", "#addCartBtn", function (event) {
@@ -493,7 +451,7 @@ function getRecipeUrl(id) {
         // if (!response.length) {
         //     console.log('No results found!');
    
-
+        })
 }
 
 
