@@ -233,7 +233,7 @@ $(document).on("click", "#addCartBtn", function (event) {
         })
             .then(function (response) {
                 if (response.length > 0) {
-                    addShoopingList(response[0].charAt(0).toUpperCase() + response[0].slice(1))
+                    addShoppingList(response[0].charAt(0).toUpperCase() + response[0].slice(1))
                 } else {
                     itemNotAValidInput()
                 }
@@ -242,13 +242,8 @@ $(document).on("click", "#addCartBtn", function (event) {
     }
 })
 
-function addShoopingList(item) {
-    var listCont = $(".shopping-container")
-    var list = $("<li>").text(item)
-    listCont.prepend(list)
-}
 
-function addShoopingList(item) { //Add input into pantry list
+function addShoppingList(item) { //Add input into pantry list
     if (shoopingList.includesItm(item)) {
         return
     } else {
@@ -275,7 +270,7 @@ function includesItm(itmName){
     return false
 }
 
-function displayShoopingIngredietns() {
+function displayShoppingIngredients() {
     var sCont = $(".shopping-container")
     sCont.empty()
     for (var i = 0; i < shoopingList.length; i++) {
@@ -302,10 +297,18 @@ function changeSCount(name, direction){
     } else if(shoppingList[findItmObjectIndex(name)].count > 1){
         shoppingList[findItmObjectIndex(name)].count -= 1
     }
-    saveIngredientList()
-    displayPantryIngredietns()
+    saveShoppingList()
+    displayShoppingIngredients()
 }
 
+function deleteItemInShopping(name){
+    var i = findItmObjectIndex(name)
+    if(i > -1){
+        shoppingList.splice(i,1)
+    }
+    saveShoppingList()
+    displayShoppingIngredients()
+}
 
 function findItmObjectIndex(name){
     for(var i = 0; i < shoppingList.length; i++){
@@ -319,10 +322,11 @@ function findItmObjectIndex(name){
 
 
 function itemNotAValidInput() {
-    var alertCont = $("<div>").addClass("callout small alert")
+    var alertCont = $("<div>").addClass("fakeItem")
     var alertMessage = $("<h5>").text("Please input a real ingredient")
     alertCont.append(alertMessage)
-    shoppingModal.append(alertCont)
+
+    $(".shoppingModalContent").append(alertCont)
 
     var secondsLeftCart = 5
     var timerInterval = setInterval(function () {
