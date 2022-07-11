@@ -23,7 +23,7 @@ $(document).on("click", "#pantry", function (event) {
 /* Open and close pantry modal*/
 $(document).on("click", "#cart", function (event) {
     cartModal.css("display", "block")
-    displayShoopingIngredietns()
+    displayShoppingIngredients()
 });
 
 $(document).on("click", ".close", function () {
@@ -203,18 +203,26 @@ $(document).on("click", ".close", function () {
     shoppingModal.css("display", "none")
 });
 
+$(document).on("click", ".increase-sItm-btn", function () {
+    changeSCount($(this).parent().siblings(".name").html(), "+")
+})
+
+$(document).on("click", ".decrease-sItm-btn", function () {
+    changeSCount($(this).parent().siblings(".name").html(), "-")
+})
+
+$(document).on("click", ".delete-ing-btn", function () {
+    deleteItemInShopping($(this).parent().siblings(".name").html())
+})
+
 /*
 $(document).on("click", ".increase-count-btn", function () {
     changeCount($(this).parent().siblings(".name").html(), "+")
 })
 
-$(document).on("click", ".decrease-count-btn", function () {
-    changeCount($(this).parent().siblings(".name").html(), "-")
-})
 
-$(document).on("click", ".delete-ing-btn", function () {
-    deleteItemInPantry($(this).parent().siblings(".name").html())
-})
+
+
 
 $(document).on("click", ".delete-shpng-btn", function () {
     debugger
@@ -244,15 +252,15 @@ $(document).on("click", "#addCartBtn", function (event) {
 
 
 function addShoppingList(item) { //Add input into pantry list
-    if (shoopingList.includesItm(item)) {
+    if (includesItm(item)) {
         return
     } else {
         var itmObj = {}
         itmObj["name"] = item
         itmObj["count"] = 1
-        shoppingList.append(itmObj)
+        shoppingList.push(itmObj)
         saveShoppingList()
-        displayShoopingIngredietns()
+        displayShoppingIngredietns()
         console.log(item)
     }
 }
@@ -273,12 +281,12 @@ function includesItm(itmName){
 function displayShoppingIngredients() {
     var sCont = $(".shopping-container")
     sCont.empty()
-    for (var i = 0; i < shoopingList.length; i++) {
+    for (var i = 0; i < shoppingList.length; i++) {
         var ing = $("<tr>")
         var delBtnCont = $("<td>")
         var deleteBtn = $("<button>").text("del").addClass("button is-small is-danger delete-shpng-btn")
         delBtnCont.append(deleteBtn)
-        var name = $("<th>").text(shoopingList[i].name).addClass("name")
+        var name = $("<th>").text(shoppingList[i].name).addClass("name")
         var iBtnCont = $("<td>")
         var incBtn = $("<button>").text("+").addClass("button is-small is-info is-light increase-sItm-btn")
         iBtnCont.append(incBtn)
@@ -287,7 +295,7 @@ function displayShoppingIngredients() {
         var decBtn = $("<button>").text("-").addClass("button is-small is-danger is-light decrease-sItm-btn")
         dBtnCont.append(decBtn)
         ing.append(delBtnCont, name, iBtnCont, ingCount, dBtnCont)
-        shpngCont.prepend(ing)
+        $("shopping-container").prepend(ing)
     }
 }
 
