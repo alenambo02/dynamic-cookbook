@@ -252,16 +252,19 @@ function addShoopingList(item) { //Add input into pantry list
     if (shoopingList.includesItm(item)) {
         return
     } else {
-        shoopingList.push(item)
-        shoopingCounts[item] = 1
-        console.log(shoopingCounts)
-        localStorage.setItem("shoppingListCount", JSON.stringify(shoopingCounts))
-        localStorage.setItem("shoopingIngredients", JSON.stringify(shoopingList))
+        var itmObj = {}
+        itmObj["name"] = item
+        itmObj["count"] = 1
+        shoppingList.append(itmObj)
+        saveShoppingList()
         displayShoopingIngredietns()
         console.log(item)
     }
 }
 
+function saveShoppingList(){
+    localStorage.setItem("shoppingIngredients", JSON.stringify(ingredientList))
+}
 
 function includesItm(itmName){
     for(var i = 0; i < shoppingList.length; i++){
@@ -273,35 +276,20 @@ function includesItm(itmName){
 }
 
 function displayShoopingIngredietns() {
-    var shpngCont = $(".shopping-container")
-    shpngCont.empty()
-
+    var sCont = $(".shopping-container")
+    sCont.empty()
     for (var i = 0; i < shoopingList.length; i++) {
-        // debugger
-        // var shopng = $("<div>").addClass("is-flex-direction-row")
-        // var name = $("<h5>").text(shoopingList[i])
-        // var incBtn = $("<button>").text("+").addClass("increase-count-btn").attr('id', 'addBtn')
-
-        // //console.log(ingredientList[i])
-        // //console.log(ingredientCounts.ingredientList[i])
-        // var ingCount = $("<h5>").text(shoopingCounts[shoopingList[i]])
-        // var decBtn = $("<button>").text("-").addClass("decrease-count-btn")
-        // shopng.append(name, incBtn, ingCount, decBtn)
-        // shpngCont.prepend(shopng)
-
         var ing = $("<tr>")
         var delBtnCont = $("<td>")
         var deleteBtn = $("<button>").text("del").addClass("button is-small is-danger delete-shpng-btn")
         delBtnCont.append(deleteBtn)
-        var name = $("<th>").text(shoopingList[i]).addClass("name")
+        var name = $("<th>").text(shoopingList[i].name).addClass("name")
         var iBtnCont = $("<td>")
-        var incBtn = $("<button>").text("+").addClass("button is-small is-info is-light increase-count-btn")
+        var incBtn = $("<button>").text("+").addClass("button is-small is-info is-light increase-sItm-btn")
         iBtnCont.append(incBtn)
-        //console.log(ingredientList[i])
-        //console.log(ingredientCounts.ingredientList[i])
-        var ingCount = $("<td>").text(shoopingCounts[shoopingList[i]])
+        var ingCount = $("<td>").text(shoppingList[i].count)
         var dBtnCont = $("<td>")
-        var decBtn = $("<button>").text("-").addClass("button is-small is-danger is-light decrease-count-btn")
+        var decBtn = $("<button>").text("-").addClass("button is-small is-danger is-light decrease-sItm-btn")
         dBtnCont.append(decBtn)
         ing.append(delBtnCont, name, iBtnCont, ingCount, dBtnCont)
         shpngCont.prepend(ing)
@@ -330,11 +318,7 @@ function displayShoopingIngredietns() {
 //     deleteItemInPantry($(this).parent().siblings(".name").html())
 // })
 
-$(document).on("click", "#addBtn", function (event) {
-    //     console.log("imhere")
-    //     // pantryModal.css("display", "block")
-    //     // displayPantryIngredietns()
-});
+
 
 
 
