@@ -7,13 +7,11 @@ if (localStorage.getItem("pantryIngredients")) { //Check if there is any stored 
 }
 
 //console.log(queryStringifyIngredients())
+var shoppingList = []
+//var shoopingCounts = {}
 
-var ingredientCounts = {}
-var shoopingList = []
-var shoopingCounts = {}
-
-if (localStorage.getItem("shoopingIngredients")) { //Check if there is any stored history to grab
-    shoopingList = JSON.parse(localStorage.getItem("shoopingIngredients"))
+if (localStorage.getItem("shoppingIngredients")) { //Check if there is any stored history to grab
+    shoppingList = JSON.parse(localStorage.getItem("shoppingIngredients"))
 }
 
 /* Open and close pantry modal*/
@@ -25,7 +23,7 @@ $(document).on("click", "#pantry", function (event) {
 /* Open and close pantry modal*/
 $(document).on("click", "#cart", function (event) {
     cartModal.css("display", "block")
-    displayShoopingIngredietns()
+    displayShoppingIngredients()
 });
 
 $(document).on("click", ".close", function () {
@@ -205,18 +203,26 @@ $(document).on("click", ".close", function () {
     shoppingModal.css("display", "none")
 });
 
+$(document).on("click", ".increase-sItm-btn", function () {
+    changeSCount($(this).parent().siblings(".name").html(), "+")
+})
+
+$(document).on("click", ".decrease-sItm-btn", function () {
+    changeSCount($(this).parent().siblings(".name").html(), "-")
+})
+
+$(document).on("click", ".delete-shpng-btn", function () {
+    deleteItemInShopping($(this).parent().siblings(".name").html())
+})
+
 /*
 $(document).on("click", ".increase-count-btn", function () {
     changeCount($(this).parent().siblings(".name").html(), "+")
 })
 
-$(document).on("click", ".decrease-count-btn", function () {
-    changeCount($(this).parent().siblings(".name").html(), "-")
-})
 
-$(document).on("click", ".delete-ing-btn", function () {
-    deleteItemInPantry($(this).parent().siblings(".name").html())
-})
+
+
 
 $(document).on("click", ".delete-shpng-btn", function () {
     debugger
@@ -228,14 +234,14 @@ $(document).on("click", ".delete-shpng-btn", function () {
 $(document).on("click", "#addCartBtn", function (event) {
     var cartVal = $(this).siblings("input").val()
     if (cartVal != "") {
-        var cartCheckUrl = "https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=597241d5914540eb9a064d99f044c672&query=" + cartVal
+        var cartCheckUrl = "https://api.edamam.com/auto-complete?app_id=fd3763f8&app_key=4577463150cadf088b2a86813ab799da&q=" + cartVal + "&limit=5"
         $.ajax({
             url: cartCheckUrl,
             method: "GET"
         })
             .then(function (response) {
                 if (response.length > 0) {
-                    addShoopingList(cartVal)
+                    addShoppingList(response[0].charAt(0).toUpperCase() + response[0].slice(1))
                 } else {
                     itemNotAValidInput()
                 }
@@ -244,97 +250,96 @@ $(document).on("click", "#addCartBtn", function (event) {
     }
 })
 
-function addShoopingList(item) {
-    var listCont = $(".shopping-container")
-    var list = $("<li>").text(item)
-    listCont.prepend(list)
-}
 
-function addShoopingList(item) { //Add input into pantry list
-    if (shoopingList.includes(item)) {
+function addShoppingList(item) { //Add input into pantry list
+    if (includesItm(item)) {
         return
     } else {
-        shoopingList.push(item)
-        shoopingCounts[item] = 1
-        console.log(shoopingCounts)
-        localStorage.setItem("shoppingListCount", JSON.stringify(shoopingCounts))
-        localStorage.setItem("shoopingIngredients", JSON.stringify(shoopingList))
-        displayShoopingIngredietns()
+        console.log("reached")
+        var itmObj = {}
+        itmObj["name"] = item
+        itmObj["count"] = 1
+        shoppingList.push(itmObj)
+        saveShoppingList()
+        displayShoppingIngredients()
         console.log(item)
     }
 }
 
-function displayShoopingIngredietns() {
-    var shpngCont = $(".shopping-container")
-    shpngCont.empty()
+function saveShoppingList(){
+    localStorage.setItem("shoppingIngredients", JSON.stringify(shoppingList))
+}
 
-    for (var i = 0; i < shoopingList.length; i++) {
-        // debugger
-        // var shopng = $("<div>").addClass("is-flex-direction-row")
-        // var name = $("<h5>").text(shoopingList[i])
-        // var incBtn = $("<button>").text("+").addClass("increase-count-btn").attr('id', 'addBtn')
+function includesItm(itmName){
+    for(var i = 0; i < shoppingList.length; i++){
+        if(shoppingList[i].name == itmName){
+            console.log(shoppingList[i].name, itmName)
+            return true
+        }
+    }
+    return false
+}
 
-        // //console.log(ingredientList[i])
-        // //console.log(ingredientCounts.ingredientList[i])
-        // var ingCount = $("<h5>").text(shoopingCounts[shoopingList[i]])
-        // var decBtn = $("<button>").text("-").addClass("decrease-count-btn")
-        // shopng.append(name, incBtn, ingCount, decBtn)
-        // shpngCont.prepend(shopng)
-
+function displayShoppingIngredients() {
+    var sCont = $(".shopping-container")
+    sCont.empty()
+    for (var i = 0; i < shoppingList.length; i++) {
+        console.log("reached display", shoppingList[i].name)
         var ing = $("<tr>")
         var delBtnCont = $("<td>")
         var deleteBtn = $("<button>").text("del").addClass("button is-small is-danger delete-shpng-btn")
         delBtnCont.append(deleteBtn)
-        var name = $("<th>").text(shoopingList[i]).addClass("name")
+        var name = $("<th>").text(shoppingList[i].name).addClass("name")
         var iBtnCont = $("<td>")
-        var incBtn = $("<button>").text("+").addClass("button is-small is-info is-light increase-count-btn")
+        var incBtn = $("<button>").text("+").addClass("button is-small is-info is-light increase-sItm-btn")
         iBtnCont.append(incBtn)
-        //console.log(ingredientList[i])
-        //console.log(ingredientCounts.ingredientList[i])
-        var ingCount = $("<td>").text(shoopingCounts[shoopingList[i]])
+        var ingCount = $("<td>").text(shoppingList[i].count)
         var dBtnCont = $("<td>")
-        var decBtn = $("<button>").text("-").addClass("button is-small is-danger is-light decrease-count-btn")
+        var decBtn = $("<button>").text("-").addClass("button is-small is-danger is-light decrease-sItm-btn")
         dBtnCont.append(decBtn)
         ing.append(delBtnCont, name, iBtnCont, ingCount, dBtnCont)
-        shpngCont.prepend(ing)
+        sCont.prepend(ing)
     }
 }
 
-// $(document).on("click", "#cart", function (event) {
-//     // cartModal.css("display", "block")
-//     displayShoopingIngredietns()
-// });
+function changeSCount(name, direction){
+    if(direction == "+"){
+        shoppingList[findItmObjectIndex(name)].count += 1
+    } else if(shoppingList[findItmObjectIndex(name)].count > 1){
+        shoppingList[findItmObjectIndex(name)].count -= 1
+    }
+    saveShoppingList()
+    displayShoppingIngredients()
+}
 
-// $(document).on("click", ".close", function () {
-//     // cartModal.css("display", "none")
-// });
+function deleteItemInShopping(name){
+    var i = findItmObjectIndex(name)
+    console.log(name)
+    console.log(i)
+    if(i > -1){
+        shoppingList.splice(i,1)
+    }
+    saveShoppingList()
+    displayShoppingIngredients()
+}
 
-// $(document).on("click", ".increase-count-btn", function () {
-//     changeCount($(this).parent().siblings(".name").html(), "+")
-
-// })
-
-// $(document).on("click", ".decrease-count-btn", function () {
-//     changeCount($(this).parent().siblings(".name").html(), "-")
-// })
-
-// $(document).on("click", ".delete-ing-btn", function () {
-//     deleteItemInPantry($(this).parent().siblings(".name").html())
-// })
-
-$(document).on("click", "#addBtn", function (event) {
-    //     console.log("imhere")
-    //     // pantryModal.css("display", "block")
-    //     // displayPantryIngredietns()
-});
-
+function findItmObjectIndex(name){
+    for(var i = 0; i < shoppingList.length; i++){
+        if(shoppingList[i].name == name){
+            console.log("Found " + name, " at index" + i)
+            return i
+        }
+    }
+    return -1
+}
 
 
 function itemNotAValidInput() {
-    var alertCont = $("<div>").addClass("callout small alert")
+    var alertCont = $("<div>").addClass("fakeItem")
     var alertMessage = $("<h5>").text("Please input a real ingredient")
     alertCont.append(alertMessage)
-    shoppingModal.append(alertCont)
+
+    $(".shoppingModalContent").append(alertCont)
 
     var secondsLeftCart = 5
     var timerInterval = setInterval(function () {
