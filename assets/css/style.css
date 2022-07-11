@@ -121,12 +121,12 @@ h2 {
     
 }
 
-
-
+/* centers entire container */
 #cardscontainer{
     justify-content: center;
 }
 
+/* forces cards to be certain size*/
 .card {
     margin-inline: 10px ;
     margin-block: 5px;
