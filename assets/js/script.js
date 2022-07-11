@@ -292,7 +292,7 @@ var displayCards = $('#displaycardshere')
 
 //generate recipes btn
 $(document).on("click", "#generateRecipes", function (event) {
-    
+    cardContanier.empty()
     var ingredientParse = queryStringifyIngredients()
 
     var makeRecipes = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=c8ae3021308e4c6fa278becfa56df80b&ingredients=" + ingredientParse + "&number=9&ranking=2"
@@ -328,8 +328,8 @@ function generateRecipeCards(data) {
         
         var cards = $("<div>").addClass("card card-shadow-is-1em p-5");
         cards.css('background-color', '#aae39c');
-        var title = $("<h3>").text(data[i].title).addClass("box has-text-centered");
-        var img = $("<img>").attr("src", data[i].image).addClass("image is-fullwidth card-image is-clickable"); 
+        var title = $("<h3>").text(data[i].title).addClass("box has-text-centered has-text-weight-bold");
+        var img = $("<img>").attr("src", data[i].image).addClass("image is-fullwidth mb-3 card-image is-clickable"); 
         img.attr("data-id", data[i].id)
         var missing = $("<h2>").text("Ingredients needed: ")
 
@@ -377,11 +377,6 @@ $.ajax({
         
         // if (!response.length) {
         //     console.log('No results found!');
-
-    
-
-
-     
     
 
     })
