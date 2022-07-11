@@ -7,13 +7,11 @@ if (localStorage.getItem("pantryIngredients")) { //Check if there is any stored 
 }
 
 //console.log(queryStringifyIngredients())
+var shoppingList = []
+//var shoopingCounts = {}
 
-var ingredientCounts = {}
-var shoopingList = []
-var shoopingCounts = {}
-
-if (localStorage.getItem("shoopingIngredients")) { //Check if there is any stored history to grab
-    shoopingList = JSON.parse(localStorage.getItem("shoopingIngredients"))
+if (localStorage.getItem("shoppingIngredients")) { //Check if there is any stored history to grab
+    shoppingList = JSON.parse(localStorage.getItem("shoppingIngredients"))
 }
 
 /* Open and close pantry modal*/
@@ -228,14 +226,14 @@ $(document).on("click", ".delete-shpng-btn", function () {
 $(document).on("click", "#addCartBtn", function (event) {
     var cartVal = $(this).siblings("input").val()
     if (cartVal != "") {
-        var cartCheckUrl = "https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=597241d5914540eb9a064d99f044c672&query=" + cartVal
+        var cartCheckUrl = "https://api.edamam.com/auto-complete?app_id=fd3763f8&app_key=4577463150cadf088b2a86813ab799da&q=" + cartVal + "&limit=5"
         $.ajax({
             url: cartCheckUrl,
             method: "GET"
         })
             .then(function (response) {
                 if (response.length > 0) {
-                    addShoopingList(cartVal)
+                    addShoopingList(response[0].charAt(0).toUpperCase() + response[0].slice(1))
                 } else {
                     itemNotAValidInput()
                 }
@@ -251,7 +249,7 @@ function addShoopingList(item) {
 }
 
 function addShoopingList(item) { //Add input into pantry list
-    if (shoopingList.includes(item)) {
+    if (shoopingList.includesItm(item)) {
         return
     } else {
         shoopingList.push(item)
@@ -262,6 +260,16 @@ function addShoopingList(item) { //Add input into pantry list
         displayShoopingIngredietns()
         console.log(item)
     }
+}
+
+
+function includesItm(itmName){
+    for(var i = 0; i < shoppingList.length; i++){
+        if(shoppingList[i].name == itmName){
+            return true
+        }
+    }
+    return false
 }
 
 function displayShoopingIngredietns() {
