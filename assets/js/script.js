@@ -215,20 +215,6 @@ $(document).on("click", ".delete-shpng-btn", function () {
     deleteItemInShopping($(this).parent().siblings(".name").html())
 })
 
-/*
-$(document).on("click", ".increase-count-btn", function () {
-    changeCount($(this).parent().siblings(".name").html(), "+")
-})
-
-
-
-
-
-$(document).on("click", ".delete-shpng-btn", function () {
-    debugger
-    deleteItemInShoopingCart($(this).parent().siblings(".name").html())
-})
-*/
 
 
 $(document).on("click", "#addCartBtn", function (event) {
