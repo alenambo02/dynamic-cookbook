@@ -215,20 +215,6 @@ $(document).on("click", ".delete-shpng-btn", function () {
     deleteItemInShopping($(this).parent().siblings(".name").html())
 })
 
-/*
-$(document).on("click", ".increase-count-btn", function () {
-    changeCount($(this).parent().siblings(".name").html(), "+")
-})
-
-
-
-
-
-$(document).on("click", ".delete-shpng-btn", function () {
-    debugger
-    deleteItemInShoopingCart($(this).parent().siblings(".name").html())
-})
-*/
 
 
 $(document).on("click", "#addCartBtn", function (event) {
@@ -353,6 +339,7 @@ function itemNotAValidInput() {
 }
 
 
+
 //generate recipes section
 
 var recipesBtn = $('#generateRecipes')
@@ -364,16 +351,16 @@ var photo = $('#photo')
 
 
 
-//generate recipes btn
+//created an event listener for the generate recipes btn
 $(document).on("click", "#generateRecipes", function (event) {
     pantryModal.css("display", "none")
     photo.css("display", "none")
 
-
+// this empties the card container for the user when they generate new recipes 
     cardContanier.empty()
 
     var ingredientParse = queryStringifyIngredients()
-
+// the api call takes in the variable above so that it can generate recipes when the ingredients choosen
     var makeRecipes = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=c8ae3021308e4c6fa278becfa56df80b&ingredients=" + ingredientParse + "&number=9&ranking=2"
     $.ajax({
         url: makeRecipes,
@@ -385,7 +372,7 @@ $(document).on("click", "#generateRecipes", function (event) {
             console.log(response)
 
 
-
+// call on generate recipes card function 
             generateRecipeCards(response)
 
         })
@@ -397,10 +384,10 @@ $(document).on("click", "#generateRecipes", function (event) {
 var cardContanier = $("#cardscontainer")
 
 
-
+// this function creates html elements that is attached to a specific data request 
 function generateRecipeCards(data) {
 
-
+// this for loop displays the data for all the recipes retrieved
     for (var i = 0; i < data.length; i++) {
 
 
@@ -412,7 +399,7 @@ function generateRecipeCards(data) {
 
         img.attr("data-id", data[i].id)
         var missing = $("<h2>").text("Ingredients needed: ")
-
+// additonally there is two nested for loops, in order to be able to retrieve the total length of the missing and used ingredients  
         for (var j = 0; j < data[i].missedIngredients.length; j++) {
             missing.append($("<h2>").text(data[i].missedIngredients[j].name)).addClass("has-text-centered");
 
@@ -424,7 +411,7 @@ function generateRecipeCards(data) {
         }
 
 
-
+// displays cards onto page 
         cards.append(title, img, missing, used);
         cardContanier.append(cards);
 
@@ -432,13 +419,15 @@ function generateRecipeCards(data) {
 }
 
 
-// working on api call for link to websites below 
+// working on api call to link the websites below 
 
+// created an event listener that is attached to the image
+// so that when the user clicks on the image they are taken to the actual recipe page
 $(document).on("click", ".card-image", function (event) {
     var id = $(this).attr("data-id")
     getRecipeUrl(id)
 })
-
+// this function makes the api call and passes the recipe ID through it
 function getRecipeUrl(id) {
 
     var getUrlLink = "https://api.spoonacular.com/recipes/" + id + "/information?apiKey=c8ae3021308e4c6fa278becfa56df80b"
@@ -450,16 +439,12 @@ function getRecipeUrl(id) {
     })
         .then(function (response) {
 
-
+// opens the url into a new browser
             window.open(response.sourceUrl)
 
             console.log(response)
 
-            // if (!response.length) {
-            //     console.log('No results found!');
-
+           
         })
 }
-
-
 

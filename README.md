@@ -51,7 +51,7 @@ $(document).on("click", "#addItemBtn", function (event) { //Add ingredient liste
 
 # Gif for Demoing Functionality
 
-![dailycalender](./images/4.gif)
+![dailycalender](./assets/images/4.gif)
 
 # Contributors
 
