@@ -1,58 +1,34 @@
- /* body {
-   margin: 20px auto;
-   font-family: "Lato";
-   font-weight: 300;
-   width: 80%;
-   text-align: center;
-   height: 100%;
-}
- 
 #granim {
    position: absolute;
    display: block;
    width: 100%;
-   height: 100%;
+   height: 89%;
 }
 
 .clickMeBtn {
-    display: block;
-    margin: auto;
- } */
+   display: block;
+   margin: auto;
 
- #granim {
-    position: absolute;
-    display: block;
-    width: 100%;
-    height: 89%;
- }
-  
- .clickMeBtn {
-    display: block;
-    margin: auto;
-  
- }
-  
- button {
-    border: 1px solid black;
-    background: white;
-    font-family: 'Lato';
-    padding: 5px 10px;
-    font-size: 1.25em;
-    cursor: pointer;
-    margin: 700px;
-    outline: none;
-    padding-left: 40px;
-    padding-right: 40px;
- }
-  
- button:hover {
-    background: black;
-    color: white;
- }
-  
- #clickBtn {
-    margin: auto;
- } 
- 
- 
- 
+}
+
+button {
+   border: 1px solid black;
+   background: white;
+   font-family: 'Lato';
+   padding: 5px 10px;
+   font-size: 1.25em;
+   cursor: pointer;
+   margin: 700px;
+   outline: none;
+   padding-left: 40px;
+   padding-right: 40px;
+}
+
+button:hover {
+   background: black;
+   color: white;
+}
+
+#clickBtn {
+   margin: auto;
+}
