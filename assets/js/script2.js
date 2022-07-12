@@ -10,7 +10,8 @@ var granimInstance = new Granim({
 
     isPausedWhenNotInView: true,
     image: {
-        source: './images/5.png',
+        source: './images/food.jpeg',
+        position: ['center', 'center'],
         stretchMode: ["stretch-if-smaller", "stretch-if-smaller"],
         blendingMode: 'multiply'
     },
