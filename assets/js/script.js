@@ -388,7 +388,6 @@ $(document).on("click", "#generateRecipes", function (event) {
 
             generateRecipeCards(response)
 
-
         })
 
 });
@@ -463,17 +462,4 @@ function getRecipeUrl(id) {
 }
 
 
-
-
-// function generateMissUsed (data) {
-// for (var j = 0; j < data.length; j ++) {
-//     var missing = $("<h2>").text("Ingredients needed: "  + data[j].missedIngredients[j].name);
-//     var used = $("<h2>").text("Ingredients used from pantry: " + data[j].usedIngredients[j].name);
-//     }
-// }
-// console.log(generateMissUsed(data));
-
-
-// var pageHeader = $("<h2>").text("Recepies Below: ").addClass("container")
-//     // var containerContent
 
