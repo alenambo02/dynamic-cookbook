@@ -45,9 +45,9 @@ $(document).on("click", "#addItemBtn", function (event) { //Add ingredient liste
 
 # Screen Shots for Design Highlight
 
-![dailycalender](./images/1.png)
-![dailycalender](./images/2.png)
-![dailycalender](./images/3.png)
+![dailycalender](./assets/images/1.png)
+![dailycalender](./assets/images/2.png)
+![dailycalender](./assets/images/3.png)
 
 # Gif for Demoing Functionality
 
