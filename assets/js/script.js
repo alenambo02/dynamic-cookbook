@@ -30,16 +30,16 @@ $(document).on("click", ".close", function () {
     pantryModal.css("display", "none")
 });
 
-$(document).on("click", ".increase-count-btn", function(){
-    changeCount($(this).parent().siblings(".name").html() ,"+")
-    
+$(document).on("click", ".increase-count-btn", function () {
+    changeCount($(this).parent().siblings(".name").html(), "+")
+
 })
 
-$(document).on("click", ".decrease-count-btn", function(){
-    changeCount($(this).parent().siblings(".name").html() ,"-")
+$(document).on("click", ".decrease-count-btn", function () {
+    changeCount($(this).parent().siblings(".name").html(), "-")
 })
 
-$(document).on("click", ".delete-ing-btn", function(){
+$(document).on("click", ".delete-ing-btn", function () {
     deleteItemInPantry($(this).parent().siblings(".name").html())
 })
 /*Get List of ingredients*/
@@ -64,8 +64,8 @@ $(document).on("click", "#addItemBtn", function (event) { //Add ingredient liste
     }
 })
 
-function addPantryIngredient(item){ //Add input into pantry list
-    if(includesIngredient(item)){
+function addPantryIngredient(item) { //Add input into pantry list
+    if (includesIngredient(item)) {
         return
     } else {
         var ingObj = {}
@@ -82,23 +82,23 @@ function addPantryIngredient(item){ //Add input into pantry list
 }
 
 
-function saveIngredientList(){
+function saveIngredientList() {
     localStorage.setItem("pantryIngredients", JSON.stringify(ingredientList))
 }
 
-function includesIngredient(ingName){
-    for(var i = 0; i < ingredientList.length; i++){
-        if(ingredientList[i].name == ingName){
+function includesIngredient(ingName) {
+    for (var i = 0; i < ingredientList.length; i++) {
+        if (ingredientList[i].name == ingName) {
             return true
         }
     }
     return false
 }
 
-function displayPantryIngredietns(){
+function displayPantryIngredietns() {
     var ingCont = $(".ingredients-container")
-    ingCont.empty() 
-    for(var i = 0; i < ingredientList.length; i++){
+    ingCont.empty()
+    for (var i = 0; i < ingredientList.length; i++) {
         var ing = $("<tr>")
         var delBtnCont = $("<td>")
         var deleteBtn = $("<button>").text("del").addClass("button is-small is-danger delete-ing-btn")
@@ -113,35 +113,35 @@ function displayPantryIngredietns(){
         var dBtnCont = $("<td>")
         var decBtn = $("<button>").text("-").addClass("button is-small is-danger is-light decrease-count-btn")
         dBtnCont.append(decBtn)
-        ing.append(delBtnCont,name,iBtnCont,ingCount,dBtnCont)
+        ing.append(delBtnCont, name, iBtnCont, ingCount, dBtnCont)
         ingCont.prepend(ing)
     }
 }
 
-function changeCount(name, direction){
+function changeCount(name, direction) {
     console.log(name, direction)
-    if(direction == "+"){
+    if (direction == "+") {
         ingredientList[findObjectIndex(name)].count += 1
-    } else if(ingredientList[findObjectIndex(name)].count > 1){
+    } else if (ingredientList[findObjectIndex(name)].count > 1) {
         ingredientList[findObjectIndex(name)].count -= 1
     }
     saveIngredientList()
     displayPantryIngredietns()
-    
+
 }
 
-function deleteItemInPantry(name){
+function deleteItemInPantry(name) {
     var i = findObjectIndex(name)
-    if(i > -1){
-        ingredientList.splice(i,1)
+    if (i > -1) {
+        ingredientList.splice(i, 1)
     }
     saveIngredientList()
     displayPantryIngredietns()
 }
 
-function findObjectIndex(name){
-    for(var i = 0; i < ingredientList.length; i++){
-        if(ingredientList[i].name == name){
+function findObjectIndex(name) {
+    for (var i = 0; i < ingredientList.length; i++) {
+        if (ingredientList[i].name == name) {
             console.log("Found " + name, " at index" + i)
             return i
         }
@@ -154,7 +154,7 @@ function fakeItemAlert() { //Notify user that input is not a real ingredient
     var alertCont = $("<div>").addClass("fakeItem")
     var alrMsg = $("<h5>").text("Please input a real ingredient")
     alertCont.append(alrMsg)
-    
+
     $(".modal-content").append(alertCont)
 
     var secondsLeft = 5 //Run the alert for 5 seconds
@@ -170,9 +170,9 @@ function fakeItemAlert() { //Notify user that input is not a real ingredient
 
 function queryStringifyIngredients() {
     var rtn = ""
-    for(var i = 0; i < ingredientList.length; i++){
-        if(i==0){
-            rtn+= ingredientList[i].name
+    for (var i = 0; i < ingredientList.length; i++) {
+        if (i == 0) {
+            rtn += ingredientList[i].name
         } else {
             rtn += ",+" + ingredientList[i].name
         }
@@ -266,13 +266,13 @@ function addShoppingList(item) { //Add input into pantry list
     }
 }
 
-function saveShoppingList(){
+function saveShoppingList() {
     localStorage.setItem("shoppingIngredients", JSON.stringify(shoppingList))
 }
 
-function includesItm(itmName){
-    for(var i = 0; i < shoppingList.length; i++){
-        if(shoppingList[i].name == itmName){
+function includesItm(itmName) {
+    for (var i = 0; i < shoppingList.length; i++) {
+        if (shoppingList[i].name == itmName) {
             console.log(shoppingList[i].name, itmName)
             return true
         }
@@ -302,30 +302,30 @@ function displayShoppingIngredients() {
     }
 }
 
-function changeSCount(name, direction){
-    if(direction == "+"){
+function changeSCount(name, direction) {
+    if (direction == "+") {
         shoppingList[findItmObjectIndex(name)].count += 1
-    } else if(shoppingList[findItmObjectIndex(name)].count > 1){
+    } else if (shoppingList[findItmObjectIndex(name)].count > 1) {
         shoppingList[findItmObjectIndex(name)].count -= 1
     }
     saveShoppingList()
     displayShoppingIngredients()
 }
 
-function deleteItemInShopping(name){
+function deleteItemInShopping(name) {
     var i = findItmObjectIndex(name)
     console.log(name)
     console.log(i)
-    if(i > -1){
-        shoppingList.splice(i,1)
+    if (i > -1) {
+        shoppingList.splice(i, 1)
     }
     saveShoppingList()
     displayShoppingIngredients()
 }
 
-function findItmObjectIndex(name){
-    for(var i = 0; i < shoppingList.length; i++){
-        if(shoppingList[i].name == name){
+function findItmObjectIndex(name) {
+    for (var i = 0; i < shoppingList.length; i++) {
+        if (shoppingList[i].name == name) {
             console.log("Found " + name, " at index" + i)
             return i
         }
@@ -406,7 +406,7 @@ function generateRecipeCards(data) {
         cards.css('background-color', '#aae39c');
 
         var title = $("<h3>").text(data[i].title).addClass("box has-text-centered has-text-weight-bold");
-        var img = $("<img>").attr("src", data[i].image).addClass("image is-fullwidth mb-3 card-image is-clickable"); 
+        var img = $("<img>").attr("src", data[i].image).addClass("image is-fullwidth mb-3 card-image is-clickable");
 
         img.attr("data-id", data[i].id)
         var missing = $("<h2>").text("Ingredients needed: ")
@@ -449,13 +449,13 @@ function getRecipeUrl(id) {
         .then(function (response) {
 
 
-        window.open(response.sourceUrl)
-        
-        console.log(response)
-        
-        // if (!response.length) {
-        //     console.log('No results found!');
-   
+            window.open(response.sourceUrl)
+
+            console.log(response)
+
+            // if (!response.length) {
+            //     console.log('No results found!');
+
         })
 }
 
