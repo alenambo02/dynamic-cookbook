@@ -12,14 +12,6 @@ body {
 
 }
 
-/*
-button {
-    background-color: rgb(255, 248, 181);
-    border-radius: 5%;
-    padding: 6px;
-    border: none;
-}
-*/
 
 #btnholder {
     display: flex;
@@ -170,6 +162,3 @@ h2 {
 
 }
 
-/* .container {
-    margin: 22px 22px;
-} */

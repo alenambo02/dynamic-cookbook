@@ -155,7 +155,7 @@ Gif of site at different screen sizes
 
 # Gif for Demoing Functionality
 
-![dailycalender](./images/4.gif)
+![dailycalender](./assets/images/4.gif)
 
 # Contributors
 
