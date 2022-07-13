@@ -1,7 +1,9 @@
 # Dynamic-Cookbook
-Dynamic-Cookbook is a food resource designed to help users create delicious meals using the ingredients they already have in their pantry. The app suggests recipes based on pantry. It also suggests recipes that need some additional ingredients so users have various recipe options. Users can also create a shopping list , located on the top-left header, in case they need. 
+Dynamic-Cookbook is a food resource designed to help users create delicious meals using the ingredients they already have in their pantry. The app suggests recipes based on pantry. It also suggests recipes that need some additional ingredients so users have various recipe options. Users can also create a shopping list , located on the top-left header, in case they need it. 
 
 - We have two modals that consists of increment & decrement button, delete button, local storage & input validation. We used Jquery ajax method to fetch recipes from spoonacular and edamam. 
+
+- We also created recipe cards using Bulma as our css framework. We all needed to get familiar to Bulma to make it easier for us to use. After going over the documentation and applying it to this project we can utilize Bulma with ease.
 
 
 # Technologies
@@ -45,7 +47,35 @@ $(document).on("click", "#addItemBtn", function (event) { //Add ingredient liste
 
 ```
 
-!Ale's note about API call probably goes here!
+Here you can see two small code snippets that fetch data and pass in a variable that is crucial to retrieve that data.
+You can also see some parameters added in the first API call as well.
+
+```
+    var ingredientParse = queryStringifyIngredients()
+
+    var makeRecipes = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=c8ae3021308e4c6fa278becfa56df80b&ingredients=" + ingredientParse + "&number=9&ranking=2"
+    $.ajax({
+        url: makeRecipes,
+        method: "GET"
+    })
+    .then(function (response)
+
+ 
+    var getUrlLink = "https://api.spoonacular.com/recipes/" + id + "/information?apiKey=c8ae3021308e4c6fa278becfa56df80b"
+
+    $.ajax({
+        url: getUrlLink,
+        method: "GET"
+
+    })
+        .then(function (response) 
+
+```
+Below you can see the data being displayed by clicking on the image that takes you to the recipe URL
+
+You can also see that the cards have been styled using Bulma and utilize flex-wrap so the cards can flow into multiple lines.
+
+![api gif](./assets/images/gif%20for%20recipe%20url%20api.gif )
 
 User story: I want to increase or decrease item quantity
 
