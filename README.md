@@ -84,7 +84,7 @@ If that’s not the case then, it subtracts the value.
 
 Like this :
 
-![dailycalender](./assets/images/inc%3Adec.gif)
+![dailycalender](./assets/images/incAndDec.gif)
 
 User Story: I want to delete an item if I need to
 
