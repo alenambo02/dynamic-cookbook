@@ -180,16 +180,11 @@ function queryStringifyIngredients() {
     return rtn
 }
 
-
-
-
 /* API ingredient check
 
 https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=597241d5914540eb9a064d99f044c672&query=god&number=5
 
 */
-
-
 
 //shopping modal 
 var shoppingModal = $('#cartModal')
@@ -215,20 +210,7 @@ $(document).on("click", ".delete-shpng-btn", function () {
     deleteItemInShopping($(this).parent().siblings(".name").html())
 })
 
-/*
-$(document).on("click", ".increase-count-btn", function () {
-    changeCount($(this).parent().siblings(".name").html(), "+")
-})
 
-
-
-
-
-$(document).on("click", ".delete-shpng-btn", function () {
-    debugger
-    deleteItemInShoopingCart($(this).parent().siblings(".name").html())
-})
-*/
 
 
 $(document).on("click", "#addCartBtn", function (event) {
