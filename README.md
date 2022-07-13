@@ -71,11 +71,11 @@ You can also see some parameters added in the first API call as well.
         .then(function (response) 
 
 ```
-Below you can see the data being displayed by clicking on the image that takes you to the recipe URL
+Below you can see the recipe data retrieved inside the cards and upon clicking on the image the recipe URL data is retrieved as well.
 
 You can also see that the cards have been styled using Bulma and utilize flex-wrap so the cards can flow into multiple lines.
 
-![api gif](./assets/images/gif%20for%20recipe%20url%20api.gif )
+![api gif](./assets/images/gif%20link.gif)
 
 User story: I want to increase or decrease item quantity
 
