@@ -30,6 +30,7 @@ $(document).on("click", ".close", function () {
     pantryModal.css("display", "none")
 });
 
+/* Button listners for increase/decrease ingredient quantiy and deleting ingredient */
 $(document).on("click", ".increase-count-btn", function () {
     changeCount($(this).parent().siblings(".name").html(), "+")
 
@@ -48,14 +49,13 @@ $(document).on("click", "#addItemBtn", function (event) { //Add ingredient liste
     var itemVal = $(this).siblings("input").val()
     if (itemVal != "") { //Simple validation for if any input at all
         var itemCheckUrl = "https://api.edamam.com/auto-complete?app_id=fd3763f8&app_key=4577463150cadf088b2a86813ab799da&q=" + itemVal + "&limit=5"
-        $.ajax({ //Fetch validation. Call api to see if an ingredient exsists with the name of the input
+        $.ajax({ //Semanitc validation. Call api to see if an ingredient exsists with the name of the input
             url: itemCheckUrl,
             method: "GET"
         })
             .then(function (response) {
                 console.log(response)
                 if (response.length > 0) { //Real items will return an array with at least 1 element
-                    //console.log("real ingredient")
                     addPantryIngredient(response[0].charAt(0).toUpperCase() + response[0].slice(1))
                 } else { //Fake items will return an empty array
                     fakeItemAlert() //Notify user that it is a fake ingredient
@@ -68,13 +68,10 @@ function addPantryIngredient(item) { //Add input into pantry list
     if (includesIngredient(item)) {
         return
     } else {
-        var ingObj = {}
+        var ingObj = {} //Save input as ingredient object with attributes
         ingObj["name"] = item
         ingObj["count"] = 1
-        ingredientList.push(ingObj)
-        //ingredientCounts[item] = 1
-        //console.log(ingredientCounts)
-        //localStorage.setItem("pantryIngredientsCount", JSON.stringify(ingredientCounts))
+        ingredientList.push(ingObj) //Add object to larger ingredient list
         saveIngredientList()
         displayPantryIngredietns()
         console.log(item)
@@ -82,11 +79,11 @@ function addPantryIngredient(item) { //Add input into pantry list
 }
 
 
-function saveIngredientList() {
+function saveIngredientList() { //Helper function to store pantry items in local storage
     localStorage.setItem("pantryIngredients", JSON.stringify(ingredientList))
 }
 
-function includesIngredient(ingName) {
+function includesIngredient(ingName) { //Helper function to avoid double adding ingredients to list if it is already there
     for (var i = 0; i < ingredientList.length; i++) {
         if (ingredientList[i].name == ingName) {
             return true
@@ -95,20 +92,18 @@ function includesIngredient(ingName) {
     return false
 }
 
-function displayPantryIngredietns() {
+function displayPantryIngredietns() { //Dynamically display saved ingredients
     var ingCont = $(".ingredients-container")
-    ingCont.empty()
+    ingCont.empty() //Clear preivous display to freshly generate
     for (var i = 0; i < ingredientList.length; i++) {
         var ing = $("<tr>")
         var delBtnCont = $("<td>")
         var deleteBtn = $("<button>").text("del").addClass("button is-small is-danger delete-ing-btn")
         delBtnCont.append(deleteBtn)
-        var name = $("<th>").text(ingredientList[i].name).addClass("name")
+        var name = $("<th>").text(ingredientList[i].name).addClass("name") //Add class name to make calling includesIngredient function easier from an event listener
         var iBtnCont = $("<td>")
         var incBtn = $("<button>").text("+").addClass("button is-small is-info is-light increase-count-btn")
         iBtnCont.append(incBtn)
-        //console.log(ingredientList[i])
-        //console.log(ingredientCounts.ingredientList[i])
         var ingCount = $("<td>").text(ingredientList[i].count)
         var dBtnCont = $("<td>")
         var decBtn = $("<button>").text("-").addClass("button is-small is-danger is-light decrease-count-btn")
@@ -118,7 +113,7 @@ function displayPantryIngredietns() {
     }
 }
 
-function changeCount(name, direction) {
+function changeCount(name, direction) { //Dynamic function to change ingredient quantity based on wheter increase or decrease was clicked
     console.log(name, direction)
     if (direction == "+") {
         ingredientList[findObjectIndex(name)].count += 1
@@ -130,7 +125,7 @@ function changeCount(name, direction) {
 
 }
 
-function deleteItemInPantry(name) {
+function deleteItemInPantry(name) { //Delete specific ingredient based on delete button being clicked
     var i = findObjectIndex(name)
     if (i > -1) {
         ingredientList.splice(i, 1)
@@ -139,7 +134,7 @@ function deleteItemInPantry(name) {
     displayPantryIngredietns()
 }
 
-function findObjectIndex(name) {
+function findObjectIndex(name) { //Helper function to search for specific ingredient object in the ingredient array
     for (var i = 0; i < ingredientList.length; i++) {
         if (ingredientList[i].name == name) {
             console.log("Found " + name, " at index" + i)
@@ -168,7 +163,7 @@ function fakeItemAlert() { //Notify user that input is not a real ingredient
     }, 1000)
 }
 
-function queryStringifyIngredients() {
+function queryStringifyIngredients() { //Convert ingredients in ingredient array as a passable string in spoonacular API call
     var rtn = ""
     for (var i = 0; i < ingredientList.length; i++) {
         if (i == 0) {
@@ -198,6 +193,7 @@ $(document).on("click", ".close", function () {
     shoppingModal.css("display", "none")
 });
 
+/* Button listners for increase/decrease ingredient quantiy and deleting ingredient */
 $(document).on("click", ".increase-sItm-btn", function () {
     changeSCount($(this).parent().siblings(".name").html(), "+")
 })
@@ -213,19 +209,19 @@ $(document).on("click", ".delete-shpng-btn", function () {
 
 
 
-$(document).on("click", "#addCartBtn", function (event) {
+$(document).on("click", "#addCartBtn", function (event) {//Add ingredient listener
     var cartVal = $(this).siblings("input").val()
-    if (cartVal != "") {
+    if (cartVal != "") { //Simple validation for if any input at all
         var cartCheckUrl = "https://api.edamam.com/auto-complete?app_id=fd3763f8&app_key=4577463150cadf088b2a86813ab799da&q=" + cartVal + "&limit=5"
-        $.ajax({
+        $.ajax({ //Semantic validation. Call api to see if an ingredient exsists with the name of the input
             url: cartCheckUrl,
             method: "GET"
         })
             .then(function (response) {
-                if (response.length > 0) {
+                if (response.length > 0) { //Real items will return an array with at least 1 element
                     addShoppingList(response[0].charAt(0).toUpperCase() + response[0].slice(1))
                 } else {
-                    itemNotAValidInput()
+                    itemNotAValidInput() //Notify user that it is a fake ingredient
                 }
             })
 
@@ -237,22 +233,21 @@ function addShoppingList(item) { //Add input into pantry list
     if (includesItm(item)) {
         return
     } else {
-        console.log("reached")
-        var itmObj = {}
+        var itmObj = {} //Save input as ingredient object with attributes
         itmObj["name"] = item
         itmObj["count"] = 1
-        shoppingList.push(itmObj)
+        shoppingList.push(itmObj) //Add object to larger shopping cart list
         saveShoppingList()
         displayShoppingIngredients()
         console.log(item)
     }
 }
 
-function saveShoppingList() {
+function saveShoppingList() { //Helper function to store shopping list items in local storage
     localStorage.setItem("shoppingIngredients", JSON.stringify(shoppingList))
 }
 
-function includesItm(itmName) {
+function includesItm(itmName) { //Helper function to avoid double adding ingredients to list if it is already there
     for (var i = 0; i < shoppingList.length; i++) {
         if (shoppingList[i].name == itmName) {
             console.log(shoppingList[i].name, itmName)
@@ -262,16 +257,16 @@ function includesItm(itmName) {
     return false
 }
 
-function displayShoppingIngredients() {
+function displayShoppingIngredients() { //Dynamically display saved ingredients
     var sCont = $(".shopping-container")
-    sCont.empty()
+    sCont.empty() //Clear preivous display to freshly generate
     for (var i = 0; i < shoppingList.length; i++) {
         console.log("reached display", shoppingList[i].name)
         var ing = $("<tr>")
         var delBtnCont = $("<td>")
         var deleteBtn = $("<button>").text("del").addClass("button is-small is-danger delete-shpng-btn")
         delBtnCont.append(deleteBtn)
-        var name = $("<th>").text(shoppingList[i].name).addClass("name")
+        var name = $("<th>").text(shoppingList[i].name).addClass("name") //Add class name to make calling includesIngredient function easier from an event listener
         var iBtnCont = $("<td>")
         var incBtn = $("<button>").text("+").addClass("button is-small is-info is-light increase-sItm-btn")
         iBtnCont.append(incBtn)
@@ -284,7 +279,7 @@ function displayShoppingIngredients() {
     }
 }
 
-function changeSCount(name, direction) {
+function changeSCount(name, direction) { //Dynamic function to change ingredient quantity based on wheter increase or decrease was clicked
     if (direction == "+") {
         shoppingList[findItmObjectIndex(name)].count += 1
     } else if (shoppingList[findItmObjectIndex(name)].count > 1) {
@@ -294,7 +289,8 @@ function changeSCount(name, direction) {
     displayShoppingIngredients()
 }
 
-function deleteItemInShopping(name) {
+
+function deleteItemInShopping(name) { //Delete specific ingredient based on delete button being clicked
     var i = findItmObjectIndex(name)
     console.log(name)
     console.log(i)
@@ -305,6 +301,7 @@ function deleteItemInShopping(name) {
     displayShoppingIngredients()
 }
 
+//Helper function to find index of ingredient object in shopping list array
 function findItmObjectIndex(name) {
     for (var i = 0; i < shoppingList.length; i++) {
         if (shoppingList[i].name == name) {
@@ -315,7 +312,7 @@ function findItmObjectIndex(name) {
     return -1
 }
 
-
+//Notify users that input isn't valid via a message block
 function itemNotAValidInput() {
     var alertCont = $("<div>").addClass("fakeItem")
     var alertMessage = $("<h5>").text("Please input a real ingredient")
